@@ -248,8 +248,8 @@ export function AIChatbot() {
   }
 
   return (
-    <Card className="h-full flex flex-col border-2 border-blue-200 shadow-2xl bg-gradient-to-br from-white via-blue-50/30 to-white">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b-2 border-blue-200 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+    <Card className="h-full flex flex-col border-2 border-cyan-200 shadow-2xl bg-gradient-to-br from-white via-cyan-50/30 to-white">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b-2 border-cyan-200 bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-700 text-white">
         <CardTitle className="flex items-center space-x-3">
           <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
             <Bot className="h-5 w-5" />
@@ -259,7 +259,7 @@ export function AIChatbot() {
               <span className="text-lg font-semibold">AI Companion</span>
               <Sparkles className="w-4 h-4 text-yellow-300" />
             </div>
-            <div className="text-xs text-blue-100 font-normal">Always here to listen</div>
+            <div className="text-xs text-cyan-50 font-normal">Always here to listen</div>
           </div>
         </CardTitle>
         <Button 
@@ -272,7 +272,7 @@ export function AIChatbot() {
         </Button>
       </CardHeader>
 
-      <CardContent className="flex-1 flex flex-col p-0 overflow-hidden bg-gradient-to-b from-blue-50/50 to-white">
+      <CardContent className="flex-1 flex flex-col p-0 overflow-hidden bg-gradient-to-b from-cyan-50/50 to-white">
         <ScrollArea className="flex-1 p-6" ref={scrollAreaRef}>
           <div className="space-y-6">
             {messages.map((message) => (
@@ -287,8 +287,8 @@ export function AIChatbot() {
                 >
                   <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center shadow-lg ${
                     message.type === "user" 
-                      ? "bg-gradient-to-br from-blue-600 to-blue-700" 
-                      : "bg-gradient-to-br from-blue-500 to-blue-600"
+                      ? "bg-gradient-to-br from-cyan-600 to-teal-600" 
+                      : "bg-gradient-to-br from-teal-500 to-cyan-600"
                   }`}>
                     {message.type === "user" ? (
                       <User className="h-5 w-5 text-white" />
@@ -299,10 +299,10 @@ export function AIChatbot() {
                   <div
                     className={`p-4 rounded-2xl transition-all duration-200 hover:scale-[1.01] shadow-md ${
                       message.type === "user"
-                        ? "bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-tr-sm"
+                        ? "bg-gradient-to-br from-cyan-600 to-teal-600 text-white rounded-tr-sm"
                         : message.needsProfessionalHelp
                         ? "bg-red-50 border-2 border-red-300 rounded-tl-sm"
-                        : "bg-white border-2 border-blue-200 rounded-tl-sm"
+                        : "bg-white border-2 border-cyan-200 rounded-tl-sm"
                     }`}
                   >
                     {message.needsProfessionalHelp && (
@@ -317,7 +317,7 @@ export function AIChatbot() {
                       {message.content}
                     </p>
                     <p className={`text-xs mt-2 ${
-                      message.type === "user" ? "text-blue-100" : "text-gray-500"
+                      message.type === "user" ? "text-cyan-100" : "text-gray-500"
                     }`}>
                       {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
@@ -329,21 +329,21 @@ export function AIChatbot() {
             {isTyping && (
               <div className="flex justify-start animate-fade-in-slide-up">
                 <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center shadow-lg">
                     <Bot className="h-5 w-5 text-white" />
                   </div>
-                  <div className="p-4 rounded-2xl rounded-tl-sm bg-white border-2 border-blue-200 shadow-md">
+                  <div className="p-4 rounded-2xl rounded-tl-sm bg-white border-2 border-cyan-200 shadow-md">
                     <div className="flex space-x-2">
                       <div
-                        className="w-2.5 h-2.5 bg-blue-600 rounded-full animate-bounce"
+                        className="w-2.5 h-2.5 bg-teal-600 rounded-full animate-bounce"
                         style={{ animationDelay: "0s" }}
                       ></div>
                       <div
-                        className="w-2.5 h-2.5 bg-blue-600 rounded-full animate-bounce"
+                        className="w-2.5 h-2.5 bg-teal-600 rounded-full animate-bounce"
                         style={{ animationDelay: "0.15s" }}
                       ></div>
                       <div
-                        className="w-2.5 h-2.5 bg-blue-600 rounded-full animate-bounce"
+                        className="w-2.5 h-2.5 bg-teal-600 rounded-full animate-bounce"
                         style={{ animationDelay: "0.3s" }}
                       ></div>
                     </div>
@@ -354,7 +354,7 @@ export function AIChatbot() {
           </div>
         </ScrollArea>
 
-        <div className="border-t-2 border-blue-200 p-4 bg-gradient-to-r from-white to-blue-50/50 backdrop-blur-sm">
+        <div className="border-t-2 border-cyan-200 p-4 bg-gradient-to-r from-white to-cyan-50/50 backdrop-blur-sm">
           <div className="flex flex-wrap gap-2 mb-3">
             {messages.length === 0 &&
               !isTyping &&
@@ -363,7 +363,7 @@ export function AIChatbot() {
                   key={starter}
                   variant="outline"
                   size="sm"
-                  className="bg-white border-2 border-blue-300 text-blue-700 hover:bg-blue-50 hover:border-blue-400 transition-all duration-200"
+                  className="bg-white border-2 border-cyan-300 text-teal-700 hover:bg-cyan-50 hover:border-teal-400 transition-all duration-200"
                   onClick={() => handleSend(starter)}
                   disabled={isTyping}
                 >
@@ -379,12 +379,12 @@ export function AIChatbot() {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               disabled={isTyping}
-              className="flex-1 border-2 border-blue-200 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-blue-500 bg-white text-gray-900 placeholder:text-gray-400"
+              className="flex-1 border-2 border-cyan-200 focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:border-teal-500 bg-white text-gray-900 placeholder:text-gray-400"
             />
             <Button
               onClick={() => handleSend()}
               disabled={isTyping || !input.trim()}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed px-6"
+              className="bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed px-6"
             >
               <Send className="h-5 w-5" />
             </Button>

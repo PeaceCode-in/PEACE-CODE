@@ -9,12 +9,12 @@ import Link from "next/link"
 
 export default function AIChatPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100/30 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50/30 to-sky-50">
       <Navigation />
       <main className="pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="mb-6">
-            <Button variant="ghost" asChild className="text-blue-700 hover:text-blue-800 hover:bg-blue-50">
+            <Button variant="ghost" asChild className="text-teal-700 hover:text-teal-800 hover:bg-cyan-50">
               <Link href="/ai-support">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to AI Support
@@ -30,7 +30,7 @@ export default function AIChatPage() {
 
             {/* Information Sidebar (30%) */}
             <aside className="lg:col-span-3 space-y-6">
-              <Card className="bg-gradient-to-br from-blue-600 to-blue-700 text-white border-0 shadow-xl">
+              <Card className="bg-gradient-to-br from-cyan-600 via-teal-600 to-blue-700 text-white border-0 shadow-xl">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-xl">
                     <Shield className="w-5 h-5" />
@@ -38,7 +38,7 @@ export default function AIChatPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-blue-100 leading-relaxed">
+                  <p className="text-cyan-50 leading-relaxed">
                     Your conversation is anonymous and secure. We do not store personal data from your chats, 
                     and all communications are encrypted for your protection.
                   </p>
@@ -58,29 +58,29 @@ export default function AIChatPage() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white border-2 border-blue-200 shadow-lg">
+              <Card className="bg-white border-2 border-cyan-200 shadow-lg">
                 <CardHeader className="flex flex-row items-center gap-3 pb-3">
-                  <Clock className="w-6 h-6 text-blue-600" />
-                  <CardTitle className="text-gray-900">Available 24/7</CardTitle>
+                  <Clock className="w-6 h-6 text-teal-600" />
+                  <CardTitle className="text-slate-800">Available 24/7</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-slate-600 leading-relaxed">
                     Your AI companion is always here to listen, whether it's day or night. 
                     No appointments needed, no waiting required.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 shadow-lg">
+              <Card className="bg-gradient-to-br from-cyan-50 to-teal-50 border-2 border-cyan-300 shadow-lg">
                 <CardHeader className="flex flex-row items-center gap-3 pb-3">
-                  <UserCheck className="w-6 h-6 text-blue-700" />
-                  <CardTitle className="text-gray-900">Need More Help?</CardTitle>
+                  <UserCheck className="w-6 h-6 text-teal-700" />
+                  <CardTitle className="text-slate-800">Need More Help?</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="text-slate-700 leading-relaxed">
                     If you need professional counseling or additional support, we're here to help.
                   </p>
-                  <Button asChild className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                  <Button asChild className="w-full bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white">
                     <Link href="/counseling">
                       Book a Session
                     </Link>
