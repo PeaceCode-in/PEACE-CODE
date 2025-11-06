@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Bot, User, Send, RefreshCw, AlertTriangle } from "lucide-react"
+import { Bot, User, Send, RefreshCw, AlertTriangle, Sparkles } from "lucide-react"
 
 interface Message {
   id: string
@@ -46,9 +46,9 @@ const copingStrategies = {
 const crisisKeywords = ["suicide", "kill myself", "end it all", "hurt myself", "self-harm", "die", "death"]
 
 const introductoryMessages = [
-  "Hello! I'm your AI mental health support assistant.",
-  "I'm here to listen and provide coping strategies for things like anxiety, stress, and feeling down.",
-  "How are you feeling today?",
+  "Hello! I'm your AI mental health support companion. 👋",
+  "I'm here to listen and provide support for things like anxiety, stress, and feeling down.",
+  "How are you feeling today? Feel free to share what's on your mind.",
 ]
 
 export function AIChatbot() {
@@ -248,54 +248,79 @@ export function AIChatbot() {
   }
 
   return (
-    <Card className="h-full flex flex-col border-primary/20 shadow-lg bg-gradient-to-br from-gray-50 to-blue-50">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b bg-white">
-        <CardTitle className="flex items-center space-x-2">
-          <Bot className="h-5 w-5 text-primary" />
-          <span>AI Mental Health Assistant</span>
+    <Card className="h-full flex flex-col border-2 border-blue-200 shadow-2xl bg-gradient-to-br from-white via-blue-50/30 to-white">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b-2 border-blue-200 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+        <CardTitle className="flex items-center space-x-3">
+          <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+            <Bot className="h-5 w-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-lg font-semibold">AI Companion</span>
+              <Sparkles className="w-4 h-4 text-yellow-300" />
+            </div>
+            <div className="text-xs text-blue-100 font-normal">Always here to listen</div>
+          </div>
         </CardTitle>
-        <Button variant="ghost" size="sm" onClick={clearChat}>
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={clearChat}
+          className="text-white hover:bg-white/20 hover:text-white"
+        >
           <RefreshCw className="h-4 w-4" />
         </Button>
       </CardHeader>
 
-      <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
-        <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
-          <div className="space-y-4">
+      <CardContent className="flex-1 flex flex-col p-0 overflow-hidden bg-gradient-to-b from-blue-50/50 to-white">
+        <ScrollArea className="flex-1 p-6" ref={scrollAreaRef}>
+          <div className="space-y-6">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.type === "user" ? "justify-end" : "justify-start"} animate-fade-in-slide-up`}
               >
                 <div
-                  className={`flex items-start space-x-2 max-w-[80%] ${
+                  className={`flex items-start space-x-3 max-w-[85%] ${
                     message.type === "user" ? "flex-row-reverse space-x-reverse" : ""
                   }`}
                 >
-                  <div className={`p-2 rounded-full ${message.type === "user" ? "bg-primary" : "bg-muted"}`}>
+                  <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center shadow-lg ${
+                    message.type === "user" 
+                      ? "bg-gradient-to-br from-blue-600 to-blue-700" 
+                      : "bg-gradient-to-br from-blue-500 to-blue-600"
+                  }`}>
                     {message.type === "user" ? (
-                      <User className="h-4 w-4 text-primary-foreground" />
+                      <User className="h-5 w-5 text-white" />
                     ) : (
-                      <Bot className="h-4 w-4 text-muted-foreground" />
+                      <Bot className="h-5 w-5 text-white" />
                     )}
                   </div>
                   <div
-                    className={`p-3 rounded-lg transition-transform hover:scale-[1.02] ${
+                    className={`p-4 rounded-2xl transition-all duration-200 hover:scale-[1.01] shadow-md ${
                       message.type === "user"
-                        ? "bg-gradient-to-br from-primary to-blue-600 text-primary-foreground shadow-md"
+                        ? "bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-tr-sm"
                         : message.needsProfessionalHelp
-                        ? "bg-red-50 border border-red-200"
-                        : "bg-white shadow-sm"
+                        ? "bg-red-50 border-2 border-red-300 rounded-tl-sm"
+                        : "bg-white border-2 border-blue-200 rounded-tl-sm"
                     }`}
                   >
                     {message.needsProfessionalHelp && (
-                      <div className="flex items-center space-x-2 mb-2 text-red-600">
-                        <AlertTriangle className="h-4 w-4" />
-                        <span className="text-sm font-medium">Professional Help Recommended</span>
+                      <div className="flex items-center space-x-2 mb-3 text-red-700">
+                        <AlertTriangle className="h-5 w-5" />
+                        <span className="text-sm font-semibold">Professional Help Recommended</span>
                       </div>
                     )}
-                    <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                    <p className="text-xs opacity-70 mt-1">{message.timestamp.toLocaleTimeString()}</p>
+                    <p className={`text-sm leading-relaxed whitespace-pre-wrap ${
+                      message.type === "user" ? "text-white" : message.needsProfessionalHelp ? "text-red-900" : "text-gray-800"
+                    }`}>
+                      {message.content}
+                    </p>
+                    <p className={`text-xs mt-2 ${
+                      message.type === "user" ? "text-blue-100" : "text-gray-500"
+                    }`}>
+                      {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -303,23 +328,23 @@ export function AIChatbot() {
 
             {isTyping && (
               <div className="flex justify-start animate-fade-in-slide-up">
-                <div className="flex items-start space-x-2">
-                  <div className="p-2 rounded-full bg-muted">
-                    <Bot className="h-4 w-4 text-muted-foreground" />
+                <div className="flex items-start space-x-3">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+                    <Bot className="h-5 w-5 text-white" />
                   </div>
-                  <div className="p-3 rounded-lg bg-white shadow-sm">
-                    <div className="flex space-x-1">
+                  <div className="p-4 rounded-2xl rounded-tl-sm bg-white border-2 border-blue-200 shadow-md">
+                    <div className="flex space-x-2">
                       <div
-                        className="w-2 h-2 bg-primary/60 rounded-full animate-bounce"
+                        className="w-2.5 h-2.5 bg-blue-600 rounded-full animate-bounce"
                         style={{ animationDelay: "0s" }}
                       ></div>
                       <div
-                        className="w-2 h-2 bg-primary/60 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.1s" }}
+                        className="w-2.5 h-2.5 bg-blue-600 rounded-full animate-bounce"
+                        style={{ animationDelay: "0.15s" }}
                       ></div>
                       <div
-                        className="w-2 h-2 bg-primary/60 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
+                        className="w-2.5 h-2.5 bg-blue-600 rounded-full animate-bounce"
+                        style={{ animationDelay: "0.3s" }}
                       ></div>
                     </div>
                   </div>
@@ -329,8 +354,8 @@ export function AIChatbot() {
           </div>
         </ScrollArea>
 
-        <div className="border-t p-4 bg-white/80 backdrop-blur-sm">
-          <div className="flex flex-wrap gap-2 mb-2">
+        <div className="border-t-2 border-blue-200 p-4 bg-gradient-to-r from-white to-blue-50/50 backdrop-blur-sm">
+          <div className="flex flex-wrap gap-2 mb-3">
             {messages.length === 0 &&
               !isTyping &&
               conversationStarters.map((starter) => (
@@ -338,7 +363,7 @@ export function AIChatbot() {
                   key={starter}
                   variant="outline"
                   size="sm"
-                  className="bg-background"
+                  className="bg-white border-2 border-blue-300 text-blue-700 hover:bg-blue-50 hover:border-blue-400 transition-all duration-200"
                   onClick={() => handleSend(starter)}
                   disabled={isTyping}
                 >
@@ -347,22 +372,26 @@ export function AIChatbot() {
               ))}
           </div>
 
-          <div className="flex space-x-2">
+          <div className="flex space-x-3">
             <Input
               placeholder="Type your message here..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               disabled={isTyping}
-              className="focus-visible:ring-2 focus-visible:ring-primary/50"
+              className="flex-1 border-2 border-blue-200 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:border-blue-500 bg-white text-gray-900 placeholder:text-gray-400"
             />
             <Button
               onClick={() => handleSend()}
               disabled={isTyping || !input.trim()}
-              className="transition-transform hover:scale-105"
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed px-6"
             >
-              <Send className="h-4 w-4" />
+              <Send className="h-5 w-5" />
             </Button>
+          </div>
+          <div className="text-xs text-gray-500 mt-3 text-center flex items-center justify-center gap-2">
+            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            <span>Available 24/7 • Confidential • Secure</span>
           </div>
         </div>
       </CardContent>
