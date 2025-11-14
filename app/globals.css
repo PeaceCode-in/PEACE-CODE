@@ -548,10 +548,10 @@ html {
   /* Shimmer Effect */
   @keyframes shimmer {
     0% {
-      background-position: -1000px 0;
+      background-position: -200% 0;
     }
     100% {
-      background-position: 1000px 0;
+      background-position: 200% 0;
     }
   }
 
@@ -611,6 +611,23 @@ html {
 
   .animate-zoom-in {
     animation: zoom-in 0.6s ease-out forwards;
+  }
+
+  /* Gradient Text Animation */
+  @keyframes text-gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-text-gradient {
+    animation: text-gradient 8s linear infinite;
   }
 
   /* Stagger Children Animation */

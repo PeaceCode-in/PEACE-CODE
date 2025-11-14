@@ -4,6 +4,8 @@ import { Navigation } from "@/components/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { GetStartedButton } from "@/components/ui/get-started-button"
+import { GradientText } from "@/components/ui/gradient-text"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useLanguage } from "@/lib/language-context"
@@ -69,77 +71,95 @@ function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen w-full relative bg-white">
       <Navigation />
 
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img src="/yoga-4489430.jpg" alt="Person meditating peacefully" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/60"></div>
-        </div>
+      {/* Hero Section */}
+      <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-20">
+        {/* Cool Blue Glow Background */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            background: "#ffffff",
+            backgroundImage: `
+              radial-gradient(
+                circle at top center,
+                rgba(70, 130, 180, 0.5),
+                transparent 70%
+              )
+            `,
+            filter: "blur(80px)",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
 
-        {/* Hero Content */}
-        <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-          <div
-            className={`transition-all duration-1200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
-          >
-            <Badge
-              variant="secondary"
-              className="px-8 py-3 text-lg font-medium bg-white/20 backdrop-blur-md text-white border-white/30 mb-8"
+        {/* Content Container */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
+            {/* Left Side - Text Content */}
+            <div
+              className={`flex flex-col justify-center space-y-8 lg:space-y-10 ${
+                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
+              } transition-all duration-1000 ease-out`}
             >
-              <span className="mr-2">✨</span>
-              {t("home.hero.badge")}
-            </Badge>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight tracking-tight space-y-2">
+                <span className="block"><GradientText text="Welcome to" className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black" /></span>
+                <span className="block"><GradientText text="Peace Code" className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black" /></span>
+              </h1>
 
-            <h1 className="text-6xl sm:text-7xl lg:text-9xl font-bold text-white mb-8 text-balance leading-[0.9] text-shadow-soft">
-              {t("home.hero.title")}
-            </h1>
+              <p className="text-xl sm:text-2xl lg:text-3xl text-black/80 font-medium leading-relaxed max-w-2xl">
+                {t("home.hero.subtitle")}
+              </p>
 
-            <p className="text-2xl sm:text-3xl text-white/90 mb-12 max-w-5xl mx-auto text-pretty leading-relaxed text-shadow-soft">
-              {t("home.hero.subtitle")}
-            </p>
+              <div className="pt-4">
+                <GetStartedButton href="/ai-support" />
+              </div>
+            </div>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Button
-                size="lg"
-                asChild
-                className="text-xl px-16 py-8 group bg-white text-primary hover:bg-white/90 hover:shadow-2xl transition-all duration-300"
-              >
-                <Link href="/ai-support">
-                  <span className="mr-3">💙</span>
-                  {t("home.hero.cta_main")}
-                  <span className="ml-3">→</span>
-                </Link>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                asChild
-                className="text-xl px-16 py-8 bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20 transition-all duration-300"
-              >
-                <Link href="/screening">
-                  <span className="mr-3">🧠</span>
-                  {t("home.hero.cta_secondary")}
-                </Link>
-              </Button>
+            {/* Right Side - Hero Image */}
+            <div
+              className={`relative flex items-center justify-center lg:justify-end ${
+                isVisible ? "opacity-100 translate-x-0 scale-100" : "opacity-0 translate-x-12 scale-95"
+              } transition-all duration-1000 ease-out delay-300`}
+            >
+              <div className="relative w-full max-w-3xl h-[700px] lg:h-[800px] xl:h-[900px] animate-float">
+                <img
+                  src="/Untitled design.svg"
+                  alt="Peace Code Hero"
+                  className="w-full h-full object-contain object-center"
+                  onError={(e) => {
+                    // Fallback if image doesn't exist
+                    const target = e.target as HTMLImageElement
+                    const currentSrc = target.src
+                    if (!currentSrc.includes("hero image.png")) {
+                      target.src = "/hero image.png"
+                    }
+                  }}
+                />
+                {/* Glow effect around image */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-transparent to-transparent rounded-full blur-3xl -z-10 animate-pulse-slow" />
+                {/* Additional floating particles effect */}
+                <div className="absolute top-10 right-10 w-4 h-4 bg-blue-400/30 rounded-full blur-sm animate-float" style={{ animationDelay: "1s" }} />
+                <div className="absolute bottom-20 left-10 w-6 h-6 bg-blue-300/20 rounded-full blur-md animate-float" style={{ animationDelay: "2s" }} />
+                <div className="absolute top-1/2 right-20 w-3 h-3 bg-blue-500/40 rounded-full blur-sm animate-float" style={{ animationDelay: "0.5s" }} />
+              </div>
             </div>
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/70 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 text-black/50 animate-bounce">
           <div className="flex flex-col items-center">
-            <span className="text-sm mb-2">Discover More</span>
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+            <span className="text-sm mb-2 font-medium">Discover More</span>
+            <div className="w-6 h-10 border-2 border-black/20 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-black/30 rounded-full mt-2 animate-pulse"></div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats bar */}
-      <section className="-mt-12 relative z-20 px-4">
+      <section className="relative z-20 px-4 pt-8 pb-8">
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 bg-white shadow-lg rounded-2xl overflow-hidden">
           {[
             {
@@ -306,9 +326,6 @@ function HomePage() {
                     <div className="p-4 bg-primary/10 rounded-2xl">
                       <span className="text-3xl">{feature.icon}</span>
                     </div>
-                    <Badge variant="outline" className="px-4 py-2 text-sm bg-primary/5 border-primary/20">
-                      New Feature
-                    </Badge>
                   </div>
 
                   <h3 className="text-5xl font-bold text-foreground text-balance">{feature.title}</h3>
