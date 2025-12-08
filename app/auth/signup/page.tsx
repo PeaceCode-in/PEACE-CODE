@@ -96,8 +96,9 @@ export default function SignupPage() {
         })
       }
 
-      router.push("/auth/check-email")
+     // router.push("/auth/check-email")
     } catch (error: unknown) {
+      console.error("Signup error:", error)
       setError("An error occurred during signup")
     } finally {
       setIsLoading(false)
