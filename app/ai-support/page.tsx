@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { Navigation } from "@/components/navigation"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
+import { SplineScene } from "@/components/ui/splite"
 import { 
   MessageSquare, 
   ShieldCheck, 
@@ -14,132 +14,121 @@ import {
   Lock, 
   Sparkles,
   ArrowRight,
-  CheckCircle2,
   Zap,
   Users,
   BookOpen,
   TrendingUp,
-  Star
+  Star,
+  Bot,
+  Mic,
+  Globe,
+  Shield
 } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
+
+// Color palette - Ocean Blues
+const colors = {
+  deepOcean: "#0A1628",
+  darkNavy: "#0F2744",
+  oceanBlue: "#1E3A5F",
+  mediumBlue: "#2E5A88",
+  skyBlue: "#4A90B5",
+  lightSky: "#87CEEB",
+  white: "#FFFFFF",
+}
 
 const capabilities = [
   {
     icon: Heart,
     title: "Emotional Support",
-    description: "Get compassionate, non-judgmental support for your feelings and emotions. Our AI companion understands what you're going through and provides empathetic responses.",
-    color: "from-cyan-500 to-teal-500"
+    description: "Get compassionate, non-judgmental support for your feelings.",
   },
   {
     icon: Brain,
-    title: "Mental Health Guidance",
-    description: "Access evidence-based coping strategies for anxiety, stress, depression, and other mental health challenges. Learn techniques that actually work.",
-    color: "from-teal-600 to-cyan-600"
+    title: "Mental Health Guidance", 
+    description: "Evidence-based coping strategies for anxiety and stress.",
   },
   {
     icon: Zap,
     title: "24/7 Availability",
-    description: "Never feel alone. Our AI companion is available round the clock, ready to listen and support you whenever you need it, day or night.",
-    color: "from-blue-600 to-teal-700"
+    description: "Always available to listen and support, day or night.",
   },
   {
     icon: ShieldCheck,
     title: "Crisis Detection",
-    description: "Advanced algorithms detect when you might need immediate professional help and guide you to appropriate resources and support services.",
-    color: "from-teal-700 to-blue-800"
+    description: "Advanced detection when you need professional help.",
   },
   {
     icon: BookOpen,
     title: "Educational Resources",
-    description: "Learn about mental health topics, coping mechanisms, mindfulness techniques, and self-care practices through interactive conversations.",
-    color: "from-cyan-400 to-teal-500"
+    description: "Learn mindfulness techniques interactively.",
   },
   {
     icon: TrendingUp,
     title: "Progress Tracking",
-    description: "Track your emotional well-being over time and identify patterns. Get insights into your mental health journey and celebrate your progress.",
-    color: "from-teal-500 to-cyan-600"
+    description: "Track your well-being and identify patterns.",
   }
 ]
 
-const features = [
-  "Confidential & Private Conversations",
-  "Evidence-Based Coping Strategies",
-  "Personalized Support Responses",
-  "Multi-Language Support",
-  "Crisis Intervention Resources",
-  "Academic Stress Management"
-]
-
 const stats = [
-  { number: "10K+", label: "Conversations Daily" },
-  { number: "24/7", label: "Always Available" },
-  { number: "95%", label: "User Satisfaction" },
-  { number: "100%", label: "Confidential" }
+  { number: "10K+", label: "Daily Chats", icon: MessageSquare },
+  { number: "24/7", label: "Available", icon: Clock },
+  { number: "95%", label: "Satisfaction", icon: Star },
+  { number: "100%", label: "Private", icon: Lock }
 ]
 
 export default function AISupportPage() {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null)
-
-  useEffect(() => {
-    // Intersection Observer for scroll animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed")
-          }
-        })
-      },
-      { threshold: 0.1 }
-    )
-    const scrollElements = document.querySelectorAll(".scroll-reveal")
-    scrollElements.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cyan-50 via-teal-50/30 to-sky-50">
+    <div className="min-h-screen bg-white">
       <Navigation />
-      <main>
-        {/* Hero Section */}
-        <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-200/30 via-teal-200/20 to-blue-300/10"></div>
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <main className="overflow-hidden">
+        {/* Hero Section - White with dotted pattern */}
+        <section className="relative min-h-screen flex items-center justify-center pt-20 bg-gradient-to-b from-[#f8fafc] to-white">
+          {/* Dotted pattern background */}
+          <div 
+            className="absolute inset-0 opacity-30"
+            style={{
+              backgroundImage: 'radial-gradient(circle at 1px 1px, #cbd5e1 1px, transparent 0)',
+              backgroundSize: '24px 24px'
+            }}
+          />
+
+          {/* Content */}
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12">
+            <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[80vh]">
               {/* Left Side - Content */}
-              <div className="text-center lg:text-left space-y-6">
-                <Badge className="bg-gradient-to-r from-cyan-600 to-teal-600 text-white px-4 py-1.5 text-sm mb-4 shadow-lg">
+              <div className="text-center lg:text-left space-y-8">
+                <Badge className="bg-[#1E3A5F] text-white border-[#1E3A5F] px-4 py-2 text-sm">
                   <Sparkles className="w-4 h-4 mr-2" />
-                  AI-Powered Support
+                  AI-Powered Mental Health
                 </Badge>
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-slate-800 leading-tight">
-                  Meet Your{" "}
-                  <span className="bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-700 bg-clip-text text-transparent">
-                    AI Companion
-                  </span>
+                
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-[#0A1628]">
+                  Meet Your
+                  <br />
+                  <span className="text-[#2E5A88]">AI Companion</span>
                 </h1>
-                <p className="text-xl sm:text-2xl text-slate-700 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                  Your trusted 24/7 mental health companion, powered by advanced AI. 
-                  Get instant support, guidance, and resources whenever you need them.
+                
+                <p className="text-xl sm:text-2xl text-[#0F2744]/70 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                  Your trusted 24/7 mental health companion. Get instant support and guidance whenever you need.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Button 
                     size="lg" 
-                    className="text-lg px-8 py-6 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300"
+                    className="text-lg h-14 px-8 bg-[#1E3A5F] hover:bg-[#0F2744] text-white shadow-xl"
                     asChild
                   >
                     <Link href="/ai-support/chat">
-                      <MessageSquare className="w-6 h-6 mr-2" />
-                      Start Chat Now
+                      <MessageSquare className="w-5 h-5 mr-2" />
+                      Start Chatting Now
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Link>
                   </Button>
                   <Button 
                     size="lg" 
-                    variant="outline" 
-                    className="text-lg px-8 py-6 border-2 border-cyan-600 text-cyan-700 hover:bg-cyan-50"
+                    variant="outline"
+                    className="text-lg h-14 px-8 border-2 border-[#2E5A88] text-[#1E3A5F] hover:bg-[#2E5A88]/10"
                     asChild
                   >
                     <Link href="#capabilities">
@@ -147,25 +136,34 @@ export default function AISupportPage() {
                     </Link>
                   </Button>
                 </div>
+
+                {/* Trust Indicators */}
+                <div className="flex items-center gap-6 justify-center lg:justify-start pt-4">
+                  <div className="flex items-center gap-2 text-[#0F2744]/70">
+                    <ShieldCheck className="w-5 h-5 text-[#2E5A88]" />
+                    <span className="text-sm">End-to-End Encrypted</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[#0F2744]/70">
+                    <Users className="w-5 h-5 text-[#2E5A88]" />
+                    <span className="text-sm">50K+ Users</span>
+                  </div>
+                </div>
               </div>
 
-              {/* Right Side - Bot Image - Transparent, No Corners */}
-              <div className="relative flex justify-center lg:justify-end items-center">
-                <div className="relative w-full max-w-lg">
-                  {/* Soft glow effect behind image */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/40 via-teal-400/30 to-blue-500/20 blur-3xl transform rotate-6 animate-pulse"></div>
-                  <div className="absolute inset-0 bg-gradient-to-tl from-teal-300/30 via-cyan-300/20 to-blue-400/10 blur-2xl transform -rotate-6"></div>
+              {/* Right Side - 3D Robot - Seamless */}
+              <div className="relative flex justify-center lg:justify-end items-center h-[500px] lg:h-[650px]">
+                <div className="w-full h-full relative">
+                  <SplineScene 
+                    scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                    className="w-full h-full"
+                  />
                   
-                  {/* Image with transparent background, no corners */}
-                  <div className="relative z-10 bot-image-seamless">
-                    <Image
-                      src="/bot.jpg"
-                      alt="AI Bot Companion"
-                      width={600}
-                      height={600}
-                      className="w-full h-auto"
-                      priority
-                    />
+                  {/* Floating Badge */}
+                  <div className="absolute bottom-6 left-6 z-20">
+                    <Badge className="bg-[#0F2744] text-white shadow-lg border-0">
+                      <Bot className="w-4 h-4 mr-2" />
+                      Interactive 3D
+                    </Badge>
                   </div>
                 </div>
               </div>
@@ -174,13 +172,14 @@ export default function AISupportPage() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-12 bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-700 text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-16 bg-[#0A1628]">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
-                <div key={index} className="text-center scroll-reveal">
-                  <div className="text-4xl sm:text-5xl font-bold mb-2">{stat.number}</div>
-                  <div className="text-cyan-100 text-sm sm:text-base">{stat.label}</div>
+                <div key={index} className="text-center">
+                  <stat.icon className="w-8 h-8 mx-auto mb-3 text-[#4A90B5]" />
+                  <div className="text-4xl sm:text-5xl font-bold text-white mb-1">{stat.number}</div>
+                  <div className="text-sm text-[#87CEEB]">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -188,43 +187,35 @@ export default function AISupportPage() {
         </section>
 
         {/* Capabilities Section */}
-        <section id="capabilities" className="py-20 px-4 sm:px-6 lg:px-8">
+        <section id="capabilities" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-[#f0f9ff]">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16 scroll-reveal">
-              <Badge className="bg-cyan-100 text-teal-700 px-4 py-1.5 mb-4">
-                What We Offer
+            <div className="text-center mb-16">
+              <Badge className="mb-4 px-4 py-2 bg-[#2E5A88] text-white border-[#2E5A88]">
+                <Sparkles className="w-4 h-4 mr-2" />
+                Capabilities
               </Badge>
-              <h2 className="text-4xl sm:text-5xl font-bold text-slate-800 mb-4">
-                What Your AI Companion Can Do
+              <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-[#0A1628]">
+                What Your AI Companion <span className="text-[#2E5A88]">Can Do</span>
               </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                Our AI companion is equipped with advanced capabilities to support your mental health journey 
-                and provide personalized assistance whenever you need it.
+              <p className="text-xl text-[#0F2744]/70 max-w-3xl mx-auto">
+                Advanced capabilities to support your mental health journey
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {capabilities.map((capability, index) => (
-                <Card
+                <Card 
                   key={index}
-                  className={`scroll-reveal border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer ${
-                    hoveredCard === index
-                      ? "border-cyan-500 shadow-xl"
-                      : "border-cyan-200 hover:border-teal-400"
-                  }`}
-                  onMouseEnter={() => setHoveredCard(index)}
-                  onMouseLeave={() => setHoveredCard(null)}
+                  className="border border-[#e2e8f0] shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white"
                 >
-                  <CardHeader>
-                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${capability.color} flex items-center justify-center mb-4 shadow-lg`}>
+                  <CardContent className="p-6">
+                    <div 
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-gradient-to-br from-[#1E3A5F] to-[#2E5A88]"
+                    >
                       <capability.icon className="w-7 h-7 text-white" />
                     </div>
-                    <CardTitle className="text-2xl text-gray-900">{capability.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base text-gray-600 leading-relaxed">
-                      {capability.description}
-                    </CardDescription>
+                    <h3 className="text-xl font-bold mb-2 text-[#0A1628]">{capability.title}</h3>
+                    <p className="text-[#0F2744]/70">{capability.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -232,81 +223,18 @@ export default function AISupportPage() {
           </div>
         </section>
 
-        {/* Features List Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-cyan-50/30">
+        {/* How It Works */}
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#f0f9ff]">
           <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="scroll-reveal">
-                <Badge className="bg-cyan-100 text-teal-700 px-4 py-1.5 mb-4">
-                  Key Features
-                </Badge>
-                <h2 className="text-4xl font-bold text-slate-800 mb-6">
-                  Why Choose Our AI Companion?
-                </h2>
-                <p className="text-lg text-slate-600 mb-8">
-                  We've built an AI companion that truly understands your needs and provides 
-                  comprehensive mental health support with cutting-edge technology.
-                </p>
-                <div className="space-y-4">
-                  {features.map((feature, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center mt-1">
-                        <CheckCircle2 className="w-5 h-5 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-slate-800">{feature}</h3>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="scroll-reveal">
-                <Card className="bg-gradient-to-br from-cyan-600 via-teal-600 to-blue-700 text-white p-8 shadow-2xl border-0">
-                  <CardHeader>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                        <Star className="w-6 h-6" />
-                      </div>
-                      <CardTitle className="text-2xl">Premium Experience</CardTitle>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-cyan-50 text-lg leading-relaxed">
-                      Experience a new level of AI-powered mental health support. Our companion 
-                      combines advanced natural language processing with evidence-based therapeutic 
-                      approaches to provide you with the best possible support.
-                    </p>
-                    <div className="flex items-center gap-2 pt-4">
-                      <Lock className="w-5 h-5" />
-                      <span className="text-cyan-50">End-to-end encrypted conversations</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-5 h-5" />
-                      <span className="text-cyan-50">Instant responses, no waiting</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Users className="w-5 h-5" />
-                      <span className="text-cyan-50">Trusted by thousands of users</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* How It Works Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16 scroll-reveal">
-              <Badge className="bg-cyan-100 text-teal-700 px-4 py-1.5 mb-4">
+            <div className="text-center mb-16">
+              <Badge className="mb-4 px-4 py-2 bg-[#1E3A5F] text-white border-[#1E3A5F]">
                 Simple Process
               </Badge>
-              <h2 className="text-4xl sm:text-5xl font-bold text-slate-800 mb-4">
-                How It Works
+              <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-[#0A1628]">
+                How It <span className="text-[#2E5A88]">Works</span>
               </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                Getting started with your AI companion is simple and straightforward.
+              <p className="text-lg text-[#0F2744]/70 max-w-2xl mx-auto">
+                Getting started is simple and straightforward
               </p>
             </div>
 
@@ -315,28 +243,37 @@ export default function AISupportPage() {
                 {
                   step: "01",
                   title: "Start Conversation",
-                  description: "Click 'Start Chat' and begin your conversation with our AI companion. No sign-up required for basic support."
+                  description: "Click 'Start Chat' and begin. No sign-up required.",
+                  icon: MessageSquare,
+                  bg: "#1E3A5F"
                 },
                 {
                   step: "02",
                   title: "Share Your Thoughts",
-                  description: "Express what's on your mind. Our AI companion listens attentively and understands your unique situation."
+                  description: "Express what's on your mind. We listen and understand.",
+                  icon: Mic,
+                  bg: "#2E5A88"
                 },
                 {
                   step: "03",
-                  title: "Get Support & Guidance",
-                  description: "Receive personalized coping strategies, resources, and support tailored to your specific needs and concerns."
+                  title: "Get Support",
+                  description: "Receive personalized strategies tailored to you.",
+                  icon: Heart,
+                  bg: "#4A90B5"
                 }
               ].map((item, index) => (
-                <Card key={index} className="scroll-reveal border-2 border-cyan-200 hover:border-teal-400 transition-all duration-300 hover:shadow-xl">
-                  <CardHeader>
-                    <div className="text-6xl font-bold text-cyan-100 mb-4">{item.step}</div>
-                    <CardTitle className="text-2xl text-slate-800">{item.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base text-slate-600 leading-relaxed">
-                      {item.description}
-                    </CardDescription>
+                <Card 
+                  key={index}
+                  className="text-center border-0 shadow-xl overflow-hidden"
+                  style={{ backgroundColor: item.bg }}
+                >
+                  <CardContent className="p-8 text-white">
+                    <div className="text-6xl font-bold text-white/20 mb-4">{item.step}</div>
+                    <div className="w-16 h-16 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-4">
+                      <item.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                    <p className="text-white/80">{item.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -344,61 +281,127 @@ export default function AISupportPage() {
           </div>
         </section>
 
+        {/* Features Section */}
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <Badge className="mb-4 px-4 py-2 bg-[#4A90B5] text-white border-[#4A90B5]">Key Features</Badge>
+                <h2 className="text-4xl font-bold mb-6 text-[#0A1628]">
+                  Why Choose Our <span className="text-[#2E5A88]">AI Companion</span>?
+                </h2>
+                <p className="text-lg text-[#0F2744]/70 mb-8">
+                  Comprehensive mental health support with cutting-edge technology.
+                </p>
+                
+                <div className="space-y-4">
+                  {[
+                    { icon: Lock, text: "Confidential & Private" },
+                    { icon: Brain, text: "Evidence-Based Strategies" },
+                    { icon: Users, text: "Personalized Responses" },
+                    { icon: Globe, text: "Multi-Language Support" },
+                    { icon: Shield, text: "Crisis Resources" },
+                    { icon: BookOpen, text: "Stress Management" }
+                  ].map((feature, index) => (
+                    <div 
+                      key={index}
+                      className="flex items-center gap-4 p-4 rounded-xl bg-[#f0f9ff] border border-[#e0f2fe] hover:border-[#2E5A88] hover:shadow-lg transition-all duration-300"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-[#1E3A5F] flex items-center justify-center">
+                        <feature.icon className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="font-medium text-[#0A1628]">{feature.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <Card className="border-0 shadow-2xl overflow-hidden bg-gradient-to-br from-[#0F2744] to-[#1E3A5F]">
+                <CardContent className="p-8 text-white">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center">
+                      <Star className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-2xl font-bold">Premium Experience</h3>
+                  </div>
+                  
+                  <p className="text-white/80 text-lg leading-relaxed mb-6">
+                    AI-powered mental health support combining advanced NLP with evidence-based therapeutic approaches.
+                  </p>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <Lock className="w-5 h-5 text-[#87CEEB]" />
+                      <span className="text-white/90">End-to-end encrypted</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Clock className="w-5 h-5 text-[#87CEEB]" />
+                      <span className="text-white/90">Instant responses</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Users className="w-5 h-5 text-[#87CEEB]" />
+                      <span className="text-white/90">Trusted by thousands</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-cyan-600 via-teal-600 to-blue-700 text-white">
-          <div className="max-w-4xl mx-auto text-center scroll-reveal">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#0A1628] via-[#0F2744] to-[#1E3A5F]">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-white">
               Ready to Begin Your Journey?
             </h2>
-            <p className="text-xl text-cyan-50 mb-10 max-w-2xl mx-auto">
-              Start a conversation with your AI companion today and experience compassionate, 
-              personalized mental health support that's always available when you need it.
+            <p className="text-xl text-[#87CEEB] mb-10 max-w-2xl mx-auto">
+              Start a conversation with your AI companion today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="text-lg px-10 py-7 bg-white text-teal-700 hover:bg-cyan-50 shadow-2xl hover:shadow-3xl transition-all duration-300"
+                className="text-lg h-14 px-10 bg-white text-[#0A1628] hover:bg-[#f0f9ff] shadow-xl"
                 asChild
               >
                 <Link href="/ai-support/chat">
-                  <MessageSquare className="w-6 h-6 mr-2" />
+                  <MessageSquare className="w-5 h-5 mr-2" />
                   Start Chat Now
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
               <Button 
                 size="lg" 
-                variant="outline" 
-                className="text-lg px-10 py-7 border-2 border-white text-white hover:bg-white/10"
+                variant="outline"
+                className="text-lg h-14 px-10 border-2 border-white/50 text-white hover:bg-white/10"
                 asChild
               >
                 <Link href="/services">
-                  Explore Other Services
+                  Explore Services
                 </Link>
               </Button>
             </div>
           </div>
         </section>
 
-        {/* Explore Other Tools Section */}
-        <section className="py-16 bg-gradient-to-b from-cyan-50/50 to-white">
+        {/* Footer Links */}
+        <section className="py-16 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-slate-800 mb-4">A Complete Wellness Ecosystem</h2>
-            <p className="text-slate-600 mb-8 text-lg">
-              Your AI companion is just one part of our comprehensive mental health toolkit. 
-              Explore other services to build a complete wellness routine.
+            <h2 className="text-3xl font-bold mb-4 text-[#0A1628]">Complete Wellness Ecosystem</h2>
+            <p className="text-[#0F2744]/70 mb-8 text-lg">
+              Your AI companion is part of our comprehensive mental health toolkit.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild variant="outline" size="lg" className="border-cyan-300 text-teal-700 hover:bg-cyan-50">
+              <Button asChild variant="outline" size="lg" className="border-[#2E5A88] text-[#0F2744] hover:bg-[#f0f9ff]">
                 <Link href="/breathe">Breathing Exercises</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-cyan-300 text-teal-700 hover:bg-cyan-50">
+              <Button asChild variant="outline" size="lg" className="border-[#2E5A88] text-[#0F2744] hover:bg-[#f0f9ff]">
                 <Link href="/journal">Digital Journal</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-cyan-300 text-teal-700 hover:bg-cyan-50">
+              <Button asChild variant="outline" size="lg" className="border-[#2E5A88] text-[#0F2744] hover:bg-[#f0f9ff]">
                 <Link href="/screening">Self-Assessments</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-cyan-300 text-teal-700 hover:bg-cyan-50">
+              <Button asChild variant="outline" size="lg" className="border-[#2E5A88] text-[#0F2744] hover:bg-[#f0f9ff]">
                 <Link href="/community">Peer Community</Link>
               </Button>
             </div>

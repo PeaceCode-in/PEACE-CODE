@@ -8,13 +8,15 @@ import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Eye, EyeOff, Mail, Lock } from "lucide-react"
+import { Eye, EyeOff, Mail, Lock, UserCircle } from "lucide-react"
 import Link from "next/link"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [role, setRole] = useState("student")
   const router = useRouter()
   const [formData, setFormData] = useState({
     email: "",
@@ -26,6 +28,19 @@ export function LoginForm() {
     setIsLoading(true)
     setError(null)
 
+    // BYPASS AUTHENTICATION FOR DEMO
+    // Simulate a short delay for realism
+    setTimeout(() => {
+      if (role === "admin") {
+        router.push("/admin")
+      } else {
+        router.push("/community")
+      }
+      setIsLoading(false)
+    }, 800)
+
+    /* 
+    // Original Auth Logic Preserved but Commented Out
     try {
       const supabase = createClient()
 
@@ -42,6 +57,7 @@ export function LoginForm() {
     } finally {
       setIsLoading(false)
     }
+    */
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +72,21 @@ export function LoginForm() {
       {error && <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md">{error}</div>}
 
       <div className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="role">I am a...</Label>
+          <Select value={role} onValueChange={setRole}>
+            <SelectTrigger>
+              <UserCircle className="w-4 h-4 mr-2 text-muted-foreground" />
+              <SelectValue placeholder="Select your role" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="student">Student</SelectItem>
+              <SelectItem value="admin">Admin</SelectItem>
+              <SelectItem value="family">Family Member</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
         <div className="space-y-2">
           <Label htmlFor="email">Email Address</Label>
           <div className="relative">
@@ -125,3 +156,4 @@ export function LoginForm() {
     </form>
   )
 }
+

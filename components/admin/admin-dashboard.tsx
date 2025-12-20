@@ -1,10 +1,29 @@
 "use client"
 
 import { useState } from "react"
+import {
+  LayoutGrid,
+  Calendar as CalendarIcon,
+  FileText,
+  Activity,
+  Settings,
+  HelpCircle,
+  LogOut,
+  Search,
+  Bell,
+  ChevronRight,
+  MoreHorizontal,
+  Video,
+  Clock,
+  CheckCircle2,
+  User
+} from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Calendar } from "@/components/ui/calendar"
 import {
   BarChart,
   Bar,
@@ -13,378 +32,366 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  LineChart,
-  Line,
   PieChart,
   Pie,
   Cell,
-  Area,
-  AreaChart,
 } from "recharts"
-import { Users, AlertTriangle, Calendar, Activity, Target, Clock, BookOpen } from "lucide-react"
 
-// Mock data for demonstration
-const screeningData = [
-  { month: "Jan", phq9: 45, gad7: 38, ghq: 42, total: 125 },
-  { month: "Feb", phq9: 52, gad7: 44, ghq: 48, total: 144 },
-  { month: "Mar", phq9: 48, gad7: 41, ghq: 45, total: 134 },
-  { month: "Apr", phq9: 61, gad7: 55, ghq: 58, total: 174 },
-  { month: "May", phq9: 58, gad7: 52, ghq: 55, total: 165 },
-  { month: "Jun", phq9: 35, gad7: 28, ghq: 32, total: 95 },
+// --- Mock Data ---
+
+const activityData = [
+  { month: "Jul", value: 65 },
+  { month: "Aug", value: 45 },
+  { month: "Sep", value: 75 },
+  { month: "Oct", value: 55 },
+  { month: "Nov", value: 85 },
+  { month: "Dec", value: 70 },
 ]
 
-const severityDistribution = [
-  { name: "Minimal", value: 45, color: "#22c55e" },
-  { name: "Mild", value: 30, color: "#eab308" },
-  { name: "Moderate", value: 20, color: "#f97316" },
-  { name: "Severe", value: 5, color: "#ef4444" },
+const progressData = [
+  { name: "Progress", value: 80 },
+  { name: "Remaining", value: 20 },
 ]
 
-const departmentData = [
-  { department: "Engineering", students: 245, highRisk: 18, avgScore: 8.2 },
-  { department: "Medicine", students: 189, highRisk: 24, avgScore: 9.1 },
-  { department: "Arts", students: 156, highRisk: 12, avgScore: 7.8 },
-  { department: "Science", students: 198, highRisk: 15, avgScore: 8.5 },
-  { department: "Business", students: 167, highRisk: 10, avgScore: 7.2 },
+const upcomingAppointments = [
+  {
+    id: 1,
+    doctor: "Dr. Emilia Winson",
+    specialty: "Psychiatrist",
+    hospital: "Campus Wellness Center",
+    date: "14 Mar 2025",
+    time: "09:00 pm",
+    type: "Video call",
+    image: "/placeholder.svg?height=40&width=40"
+  }
 ]
 
-const utilizationData = [
-  { service: "AI Support", usage: 78, satisfaction: 4.6 },
-  { service: "Counseling", usage: 45, satisfaction: 4.8 },
-  { service: "Resources", usage: 62, satisfaction: 4.4 },
-  { service: "Community", usage: 34, satisfaction: 4.2 },
-  { service: "Screening", usage: 89, satisfaction: 4.5 },
+const studentFlags = [
+  {
+    id: 1,
+    title: "High Anxiety Alert",
+    student: "Alex Thompson",
+    time: "10:00pm - 12:00 pm",
+    type: "stress",
+    color: "bg-orange-100 text-orange-600"
+  },
+  {
+    id: 2,
+    title: "Depression Screening",
+    student: "Sarah Chen",
+    time: "09:00am - 10:00 am",
+    type: "therapy",
+    color: "bg-blue-100 text-blue-600"
+  },
+  {
+    id: 3,
+    title: "Routine Check-in",
+    student: "Mike Ross",
+    time: "02:00pm - 03:00 pm",
+    type: "checkup",
+    color: "bg-green-100 text-green-600"
+  }
 ]
 
-const weeklyTrends = [
-  { day: "Mon", anxiety: 65, depression: 58, stress: 72 },
-  { day: "Tue", anxiety: 59, depression: 54, stress: 68 },
-  { day: "Wed", anxiety: 62, depression: 57, stress: 70 },
-  { day: "Thu", anxiety: 68, depression: 61, stress: 75 },
-  { day: "Fri", anxiety: 55, depression: 48, stress: 62 },
-  { day: "Sat", anxiety: 42, depression: 38, stress: 45 },
-  { day: "Sun", anxiety: 48, depression: 44, stress: 52 },
-]
+// --- Components ---
+
+const SidebarItem = ({ icon: Icon, label, active = false }: { icon: any, label: string, active?: boolean }) => (
+  <div className={`flex flex-col items-center justify-center p-4 mb-4 rounded-xl cursor-pointer transition-all ${active ? 'text-[#4ADE80]' : 'text-gray-400 hover:text-white'}`}>
+    <Icon className={`w-6 h-6 mb-1 ${active ? 'text-[#4ADE80]' : ''}`} />
+    {/* <span className="text-xs font-medium">{label}</span> */}
+    {/* Icon-only sidebar for cleaner look based on image, or minimal text */}
+  </div>
+)
 
 export function AdminDashboard() {
-  const [timeRange, setTimeRange] = useState("6months")
-  const [selectedDepartment, setSelectedDepartment] = useState("all")
-
-  const totalStudents = departmentData.reduce((sum, dept) => sum + dept.students, 0)
-  const totalHighRisk = departmentData.reduce((sum, dept) => sum + dept.highRisk, 0)
-  const avgUtilization = utilizationData.reduce((sum, service) => sum + service.usage, 0) / utilizationData.length
+  const [date, setDate] = useState<Date | undefined>(new Date())
 
   return (
-    <div className="space-y-8">
-      {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Assessments</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{totalStudents}</div>
-            <p className="text-xs text-muted-foreground">+12% from last month</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">High Risk Students</CardTitle>
-            <AlertTriangle className="h-4 w-4 text-red-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-red-600">{totalHighRisk}</div>
-            <p className="text-xs text-muted-foreground">
-              {((totalHighRisk / totalStudents) * 100).toFixed(1)}% of total
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Platform Utilization</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{avgUtilization.toFixed(0)}%</div>
-            <p className="text-xs text-muted-foreground">Average across all services</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Intervention Success</CardTitle>
-            <Target className="h-4 w-4 text-green-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-600">73%</div>
-            <p className="text-xs text-muted-foreground">Students showing improvement</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-        <div className="flex gap-4">
-          <Select value={timeRange} onValueChange={setTimeRange}>
-            <SelectTrigger className="w-[180px]">
-              <Calendar className="h-4 w-4 mr-2" />
-              <SelectValue placeholder="Time Range" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="1month">Last Month</SelectItem>
-              <SelectItem value="3months">Last 3 Months</SelectItem>
-              <SelectItem value="6months">Last 6 Months</SelectItem>
-              <SelectItem value="1year">Last Year</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <Select value={selectedDepartment} onValueChange={setSelectedDepartment}>
-            <SelectTrigger className="w-[180px]">
-              <BookOpen className="h-4 w-4 mr-2" />
-              <SelectValue placeholder="Department" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Departments</SelectItem>
-              <SelectItem value="engineering">Engineering</SelectItem>
-              <SelectItem value="medicine">Medicine</SelectItem>
-              <SelectItem value="arts">Arts</SelectItem>
-              <SelectItem value="science">Science</SelectItem>
-              <SelectItem value="business">Business</SelectItem>
-            </SelectContent>
-          </Select>
+    <div className="flex min-h-screen bg-[#F5F7FA] font-sans">
+      {/* Sidebar */}
+      <aside className="w-24 bg-[#1A1C1E] flex flex-col items-center py-8 fixed h-full z-10 rounded-r-3xl">
+        <div className="mb-12">
+          <div className="w-10 h-10 bg-[#4ADE80] rounded-full flex items-center justify-center">
+            <span className="text-[#1A1C1E] font-bold text-xl">+</span>
+          </div>
         </div>
-      </div>
 
-      {/* Main Analytics */}
-      <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="trends">Trends</TabsTrigger>
-          <TabsTrigger value="departments">Departments</TabsTrigger>
-          <TabsTrigger value="services">Services</TabsTrigger>
-          <TabsTrigger value="interventions">Interventions</TabsTrigger>
-        </TabsList>
+        <nav className="flex-1 w-full px-2">
+          <SidebarItem icon={LayoutGrid} label="Dashboard" active />
+          <SidebarItem icon={CalendarIcon} label="Calendar" />
+          <SidebarItem icon={FileText} label="Reports" />
+          <SidebarItem icon={Activity} label="Analytics" />
+          <SidebarItem icon={Settings} label="Settings" />
+        </nav>
 
-        <TabsContent value="overview" className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Monthly Screening Trends</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <AreaChart data={screeningData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="month" />
-                    <YAxis />
-                    <Tooltip />
-                    <Area type="monotone" dataKey="total" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.3} />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
+        <div className="mt-auto flex flex-col gap-4 mb-4">
+          <SidebarItem icon={HelpCircle} label="Help" />
+          <SidebarItem icon={LogOut} label="Logout" />
+        </div>
+      </aside>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Severity Distribution</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <PieChart>
-                    <Pie
-                      data={severityDistribution}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                      outerRadius={80}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {severityDistribution.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
+      {/* Main Content */}
+      <main className="flex-1 ml-24 p-8">
+        {/* Header */}
+        <header className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-800">Hi, Admin</h1>
+            <p className="text-gray-500 mt-1">Let's track student wellness daily!</p>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Weekly Mental Health Patterns</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={weeklyTrends}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="day" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="anxiety" stroke="#f59e0b" strokeWidth={2} />
-                  <Line type="monotone" dataKey="depression" stroke="#ef4444" strokeWidth={2} />
-                  <Line type="monotone" dataKey="stress" stroke="#8b5cf6" strokeWidth={2} />
-                </LineChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </TabsContent>
+          <div className="flex items-center gap-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Input
+                placeholder="Search..."
+                className="pl-10 bg-white border-none rounded-full w-64 shadow-sm"
+              />
+            </div>
+            <Button variant="ghost" size="icon" className="rounded-full bg-white shadow-sm relative">
+              <Bell className="w-5 h-5 text-gray-600" />
+              <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
+            </Button>
+            <Avatar className="w-10 h-10 border-2 border-white shadow-sm">
+              <AvatarImage src="/placeholder-user.jpg" />
+              <AvatarFallback>AD</AvatarFallback>
+            </Avatar>
+          </div>
+        </header>
 
-        <TabsContent value="trends" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Assessment Type Breakdown</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={400}>
-                <BarChart data={screeningData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="phq9" fill="#3b82f6" name="PHQ-9 (Depression)" />
-                  <Bar dataKey="gad7" fill="#10b981" name="GAD-7 (Anxiety)" />
-                  <Bar dataKey="ghq" fill="#8b5cf6" name="GHQ-12 (General)" />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </TabsContent>
+        <div className="grid grid-cols-12 gap-8">
+          {/* Left Column (Main Widgets) */}
+          <div className="col-span-12 lg:col-span-8 space-y-8">
 
-        <TabsContent value="departments" className="space-y-6">
-          <div className="grid gap-6">
-            {departmentData.map((dept) => (
-              <Card key={dept.department}>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg">{dept.department}</CardTitle>
-                    <div className="flex items-center space-x-4">
-                      <Badge variant="secondary">{dept.students} students</Badge>
-                      <Badge variant={dept.highRisk > 20 ? "destructive" : "secondary"}>
-                        {dept.highRisk} high risk
-                      </Badge>
-                    </div>
+            {/* Promo / Check Condition Card */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card className="bg-[#E6F7F4] border-none shadow-none rounded-3xl col-span-1 md:col-span-3 relative overflow-hidden">
+                <CardContent className="p-8 flex items-center justify-between relative z-10">
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#1A1C1E] mb-2">Check Student Status</h2>
+                    <p className="text-gray-600 mb-6 max-w-md">Review the latest mental health screenings and automated risk flags for the student body.</p>
+                    <Button className="bg-[#4ADE80] hover:bg-[#3BC770] text-[#1A1C1E] font-semibold rounded-full px-8">
+                      Check It Now
+                    </Button>
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Total Assessments</p>
-                      <p className="text-2xl font-bold">{dept.students}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">High Risk %</p>
-                      <p className="text-2xl font-bold text-red-600">
-                        {((dept.highRisk / dept.students) * 100).toFixed(1)}%
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Avg Score</p>
-                      <p className="text-2xl font-bold">{dept.avgScore}</p>
-                    </div>
+                  <div className="hidden md:block">
+                    <Activity className="w-32 h-32 text-[#4ADE80] opacity-20 absolute right-0 top-0 transform translate-x-8 -translate-y-8" />
+                    <User className="w-24 h-24 text-[#1A1C1E] opacity-10" />
                   </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-        </TabsContent>
+            </div>
 
-        <TabsContent value="services" className="space-y-6">
-          <div className="grid gap-6">
-            {utilizationData.map((service) => (
-              <Card key={service.service}>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg">{service.service}</CardTitle>
-                    <div className="flex items-center space-x-4">
-                      <Badge variant="secondary">{service.usage}% utilization</Badge>
-                      <Badge variant="secondary">★ {service.satisfaction}/5.0</Badge>
+            {/* Upcoming Appointment / Critical Alert */}
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-gray-800">Critical Intervention</h3>
+                <Button variant="ghost" className="text-gray-500 hover:text-gray-800">See All</Button>
+              </div>
+              <Card className="border-none shadow-sm rounded-3xl overflow-hidden">
+                <CardContent className="p-6">
+                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center">
+                        <Activity className="w-8 h-8 text-blue-600" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-gray-800">Engineering Dept. Crisis</h4>
+                        <p className="text-gray-500">Multiple high-risk flags reported</p>
+                      </div>
                     </div>
+
+                    <div className="flex items-center gap-6">
+                      <div className="flex items-center gap-2 text-gray-600 bg-gray-50 px-4 py-2 rounded-xl">
+                        <CalendarIcon className="w-4 h-4" />
+                        <span className="text-sm font-medium">Today, 20 Nov</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-600 bg-gray-50 px-4 py-2 rounded-xl">
+                        <Clock className="w-4 h-4" />
+                        <span className="text-sm font-medium">Urgent</span>
+                      </div>
+                    </div>
+
+                    <Button className="bg-[#1A1C1E] text-white rounded-full px-6">
+                      View Details
+                    </Button>
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-primary h-2 rounded-full" style={{ width: `${service.usage}%` }}></div>
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {service.usage}% of students have used this service
-                  </p>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-        </TabsContent>
+            </div>
 
-        <TabsContent value="interventions" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Target className="h-5 w-5 text-green-600" />
-                  <span>Recommended Interventions</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="border-l-4 border-red-500 pl-4">
-                  <h4 className="font-semibold text-red-700">High Priority</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Increase counseling staff capacity - 79 students waiting for appointments
-                  </p>
+            {/* Patient Activities Chart */}
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-gray-800">Student Screening Activity</h3>
+                <select className="bg-white border-none rounded-lg px-3 py-1 text-sm font-medium text-gray-600 shadow-sm outline-none">
+                  <option>Monthly</option>
+                  <option>Weekly</option>
+                </select>
+              </div>
+              <Card className="border-none shadow-sm rounded-3xl">
+                <CardContent className="p-6">
+                  <div className="h-[300px] w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={activityData} barSize={40}>
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
+                        <XAxis
+                          dataKey="month"
+                          axisLine={false}
+                          tickLine={false}
+                          tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                          dy={10}
+                        />
+                        <YAxis
+                          axisLine={false}
+                          tickLine={false}
+                          tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                        />
+                        <Tooltip
+                          cursor={{ fill: 'transparent' }}
+                          contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+                        />
+                        <Bar dataKey="value" fill="#E6F7F4" radius={[20, 20, 20, 20]}>
+                          {activityData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#E6F7F4' : '#4ADE80'} />
+                          ))}
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Bottom Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card className="border-none shadow-sm rounded-3xl bg-white">
+                <CardContent className="p-6 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center">
+                      <CheckCircle2 className="w-6 h-6 text-blue-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-800">Good Conditions</h4>
+                      <p className="text-sm text-gray-500">Anxiety & wellness stable</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-gray-400" />
+                </CardContent>
+              </Card>
+
+              <Card className="border-none shadow-sm rounded-3xl bg-white">
+                <CardContent className="p-6 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center">
+                      <Activity className="w-6 h-6 text-orange-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-800">Risk Factors</h4>
+                      <p className="text-sm text-gray-500">Exam stress rising</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-gray-400" />
+                </CardContent>
+              </Card>
+            </div>
+
+          </div>
+
+          {/* Right Column (Side Widgets) */}
+          <div className="col-span-12 lg:col-span-4 space-y-8">
+
+            {/* Calendar */}
+            <Card className="border-none shadow-sm rounded-3xl bg-white">
+              <CardContent className="p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="font-bold text-gray-800">Calendar</h3>
+                  <MoreHorizontal className="w-5 h-5 text-gray-400" />
                 </div>
-                <div className="border-l-4 border-orange-500 pl-4">
-                  <h4 className="font-semibold text-orange-700">Medium Priority</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Implement stress management workshops during exam periods
-                  </p>
-                </div>
-                <div className="border-l-4 border-yellow-500 pl-4">
-                  <h4 className="font-semibold text-yellow-700">Low Priority</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Expand peer support program to include more trained volunteers
-                  </p>
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  className="rounded-md border-none w-full flex justify-center"
+                  classNames={{
+                    head_cell: "text-gray-400 font-normal text-[0.8rem]",
+                    cell: "text-center text-sm p-0 relative [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
+                    day: "h-9 w-9 p-0 font-normal aria-selected:opacity-100 hover:bg-gray-100 rounded-full",
+                    day_selected: "bg-[#4ADE80] text-[#1A1C1E] hover:bg-[#4ADE80] hover:text-[#1A1C1E] focus:bg-[#4ADE80] focus:text-[#1A1C1E]",
+                    day_today: "bg-gray-100 text-gray-900",
+                  }}
+                />
+              </CardContent>
+            </Card>
+
+            {/* Daily Progress */}
+            <Card className="border-none shadow-sm rounded-3xl bg-[#E6F7F4]">
+              <CardContent className="p-8 flex flex-col items-center text-center">
+                <h3 className="font-bold text-gray-800 mb-2">Daily Progress</h3>
+                <p className="text-sm text-gray-500 mb-6">Keep improving the quality of student health</p>
+
+                <div className="relative w-40 h-40 flex items-center justify-center">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={progressData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={80}
+                        startAngle={90}
+                        endAngle={-270}
+                        dataKey="value"
+                        stroke="none"
+                      >
+                        <Cell fill="#4ADE80" />
+                        <Cell fill="#FFFFFF" />
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-3xl font-bold text-[#1A1C1E]">80%</span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Clock className="h-5 w-5 text-blue-600" />
-                  <span>Intervention Timeline</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <div>
-                    <p className="font-medium">Immediate (1-2 weeks)</p>
-                    <p className="text-sm text-muted-foreground">Crisis intervention protocols</p>
-                  </div>
+            {/* List of Appointments / Flags */}
+            <Card className="border-none shadow-sm rounded-3xl bg-white">
+              <CardContent className="p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="font-bold text-gray-800">Recent Alerts</h3>
+                  <Button variant="ghost" size="sm" className="text-[#4ADE80] hover:text-[#3BC770]">See All</Button>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                  <div>
-                    <p className="font-medium">Short-term (1-3 months)</p>
-                    <p className="text-sm text-muted-foreground">Staff training and resource allocation</p>
-                  </div>
+
+                <div className="space-y-4">
+                  {studentFlags.map((flag) => (
+                    <div key={flag.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${flag.color}`}>
+                          {flag.type === 'stress' && <Activity className="w-5 h-5" />}
+                          {flag.type === 'therapy' && <User className="w-5 h-5" />}
+                          {flag.type === 'checkup' && <CheckCircle2 className="w-5 h-5" />}
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-sm text-gray-800">{flag.title}</h4>
+                          <p className="text-xs text-gray-500">{flag.time}</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-gray-400" />
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                  <div>
-                    <p className="font-medium">Long-term (3-12 months)</p>
-                    <p className="text-sm text-muted-foreground">Policy changes and program expansion</p>
-                  </div>
-                </div>
+
+                <Button variant="ghost" className="w-full mt-4 text-gray-500 hover:text-gray-800 flex items-center justify-center gap-2">
+                  <span>See More Schedule</span>
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
               </CardContent>
             </Card>
+
           </div>
-        </TabsContent>
-      </Tabs>
+        </div>
+      </main>
     </div>
   )
 }

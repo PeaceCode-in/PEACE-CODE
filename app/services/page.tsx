@@ -51,7 +51,7 @@ const services = [
     description: "Guided breathwork to calm your nervous system in minutes.",
   },
   {
-    href: "/gratitude",
+    href: "/gratitude-wall",
     icon: Smile,
     title: "Gratitude Wall",
     description: "Share and read positive messages from the community.",

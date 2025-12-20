@@ -36,8 +36,10 @@ import {
   Activity,
   Brain,
   Sun,
+  MessageCircle,
 } from "lucide-react"
 import Link from "next/link"
+import { RatingInteraction } from "@/components/ui/emoji-rating"
 
 const sidebarItems = [
   {
@@ -66,7 +68,7 @@ const sidebarItems = [
   },
   {
     title: "Gratitude",
-    url: "/gratitude",
+    url: "/gratitude-wall",
     icon: Sparkles,
     description: "Gratitude wall",
   },
@@ -271,6 +273,22 @@ export default function StudentDashboard() {
                   </CardContent>
                 </Card>
               </div>
+
+              {/* Mood Check-in */}
+              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
+                <CardContent className="py-8">
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="flex items-center gap-2 text-sm font-medium uppercase tracking-[0.15em] text-muted-foreground">
+                      <MessageCircle className="h-4 w-4" />
+                      <span>How are you feeling today?</span>
+                    </div>
+                    <RatingInteraction 
+                      onChange={(rating) => console.log("User rated:", rating)} 
+                    />
+                    <div className="mt-2 h-px w-32 bg-gradient-to-r from-transparent via-border to-transparent" />
+                  </div>
+                </CardContent>
+              </Card>
 
               {/* Quick Actions */}
               <div>

@@ -5,7 +5,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { GetStartedButton } from "@/components/ui/get-started-button"
-import { GradientText } from "@/components/ui/gradient-text"
+import { AnimatedText } from "@/components/ui/animated-underline-text-one"
+import FeaturesBentoGrid from "@/components/FeaturesBentoGrid"
+import { FeatureShowcase } from "@/components/FeatureShowcase"
+import TestimonialsSection from "@/components/TestimonialsSection"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useLanguage } from "@/lib/language-context"
@@ -13,6 +16,8 @@ import { Bot, Users, Sparkles, ShieldCheck } from "lucide-react"
 import { CheckCircle, XCircle } from "lucide-react"
 import { Check, X } from "lucide-react"
 import Image from "next/image"
+import { ExpandCards } from "@/components/ui/expand-cards"
+import { ComparisonSection } from "@/components/ComparisonSection"
 
 function AnimatedCounter({ end, duration = 2000, suffix = "" }: { end: number; duration?: number; suffix?: string }) {
   const [count, setCount] = useState(0)
@@ -76,25 +81,24 @@ function HomePage() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-20">
-        {/* Cool Blue Glow Background */}
+        {/* Cool Blue Glow Overlay */}
         <div
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-[1] pointer-events-none"
           style={{
-            background: "#ffffff",
+            background: "transparent",
             backgroundImage: `
               radial-gradient(
                 circle at top center,
-                rgba(70, 130, 180, 0.5),
+                rgba(70, 130, 180, 0.3),
                 transparent 70%
               )
             `,
-            filter: "blur(80px)",
             backgroundRepeat: "no-repeat",
           }}
         />
 
         {/* Content Container */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pointer-events-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
             {/* Left Side - Text Content */}
             <div
@@ -102,17 +106,29 @@ function HomePage() {
                 isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
               } transition-all duration-1000 ease-out`}
             >
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight tracking-tight space-y-2">
-                <span className="block"><GradientText text="Welcome to" className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black" /></span>
-                <span className="block"><GradientText text="Peace Code" className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black" /></span>
-              </h1>
+              <AnimatedText
+                text="Peace Code"
+                textClassName="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight"
+                underlineClassName="text-primary"
+              />
 
               <p className="text-xl sm:text-2xl lg:text-3xl text-black/80 font-medium leading-relaxed max-w-2xl">
                 {t("home.hero.subtitle")}
               </p>
 
-              <div className="pt-4">
+              <div className="pt-4 flex flex-wrap gap-4">
                 <GetStartedButton href="/ai-support" />
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="text-lg px-8 py-6 border-2 border-primary hover:bg-primary hover:text-white transition-all duration-300"
+                  asChild
+                >
+                  <Link href="/auth/simple-login">
+                    Student Dashboard
+                    <span className="ml-2">→</span>
+                  </Link>
+                </Button>
               </div>
             </div>
 
@@ -184,7 +200,8 @@ function HomePage() {
         <p className="text-center text-xs text-sky-600 mt-2">* Data based on internal outcome evaluations and user feedback.</p>
       </section>
 
-      {/* Connected ecosystem section */}
+      {/* Connected ecosystem section replaced by new showcase */}
+      <FeatureShowcase />
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-sky-50">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           {/* Left text + cards */}
@@ -218,6 +235,8 @@ function HomePage() {
         </div>
       </section>
 
+      <FeaturesBentoGrid />
+      <TestimonialsSection />
       {/* Statistics Section with Parallax */}
       <section className="section-spacing bg-gradient-to-b from-primary/10 via-blue-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -255,165 +274,7 @@ function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Immersive Features Section with Images */}
-      <section className="section-spacing-lg bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-24 scroll-reveal">
-            <Badge variant="secondary" className="mb-8 px-8 py-3 text-lg bg-accent/10 text-accent border-accent/20">
-              <span className="mr-2">🌿</span>
-              Wellness Tools & Features
-            </Badge>
-            <h2 className="text-6xl sm:text-7xl font-bold text-foreground mb-12 text-balance">
-              Your Journey to{" "}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Wellness</span>
-            </h2>
-            <p className="text-2xl text-muted-foreground max-w-5xl mx-auto text-pretty leading-relaxed">
-              Discover our comprehensive suite of mental health tools designed to support your daily wellness journey
-            </p>
-          </div>
-
-          {/* Feature Cards with Large Images */}
-          <div className="space-y-32">
-            {[
-              {
-                icon: "📝",
-                title: "Digital Journal",
-                description:
-                  "Express your thoughts and track your mood with our therapeutic journaling experience. Write freely in a safe, private space designed for healing.",
-                href: "/journal",
-                image: "/peaceful-writing-desk-with-journal-soft-lighting-m.jpg",
-                features: ["Mood Tracking", "Private & Secure", "Guided Prompts", "Progress Insights"],
-                reverse: false,
-              },
-              {
-                icon: "🌬️",
-                title: "Breathe Pacer",
-                description:
-                  "Guided breathing exercises to calm your mind and reduce anxiety instantly. Experience the power of mindful breathing with our immersive interface.",
-                href: "/breathe",
-                image: "/serene-meditation-breathing-exercise-calm-blue-atm.jpg",
-                features: ["Multiple Techniques", "Customizable Sessions", "Calming Visuals", "Stress Relief"],
-                reverse: true,
-              },
-              {
-                icon: "⏱️",
-                title: "Focus Flow",
-                description:
-                  "Pomodoro timer with ambient sounds to enhance your productivity and focus. Create the perfect environment for deep work and study sessions.",
-                href: "/focus",
-                image: "/focused-study-environment-productivity-timer-ambie.jpg",
-                features: ["Pomodoro Timer", "Ambient Sounds", "Task Management", "Focus Analytics"],
-                reverse: false,
-              },
-              {
-                icon: "✨",
-                title: "Gratitude Wall",
-                description:
-                  "Share and discover positive messages in our community gratitude space. Connect with others through the power of gratitude and positivity.",
-                href: "/gratitude",
-                image: "/community-gratitude-wall-positive-messages-hope-in.jpg",
-                features: ["Anonymous Sharing", "Community Support", "Daily Inspiration", "Positive Vibes"],
-                reverse: true,
-              },
-            ].map((feature, index) => (
-              <div
-                key={index}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center scroll-reveal ${feature.reverse ? "lg:grid-flow-col-dense" : ""}`}
-              >
-                <div className={`space-y-8 ${feature.reverse ? "lg:col-start-2" : ""}`}>
-                  <div className="flex items-center space-x-4">
-                    <div className="p-4 bg-primary/10 rounded-2xl">
-                      <span className="text-3xl">{feature.icon}</span>
-                    </div>
-                  </div>
-
-                  <h3 className="text-5xl font-bold text-foreground text-balance">{feature.title}</h3>
-
-                  <p className="text-xl text-muted-foreground leading-relaxed text-pretty">{feature.description}</p>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    {feature.features.map((feat, i) => (
-                      <div key={i} className="flex items-center space-x-3">
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                        <span className="text-foreground font-medium">{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <Button asChild size="lg" className="text-lg px-8 py-4">
-                    <Link href={feature.href}>
-                      Try {feature.title}
-                      <span className="ml-2">→</span>
-                    </Link>
-                  </Button>
-                </div>
-
-                <div className={`relative ${feature.reverse ? "lg:col-start-1" : ""}`}>
-                  <div className="relative overflow-hidden rounded-3xl shadow-2xl group">
-                    <img
-                      src={feature.image || "/placeholder.svg"}
-                      alt={feature.title}
-                      className="w-full h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent"></div>
-                  </div>
-                  <div className="absolute -top-8 -right-8 w-24 h-24 bg-accent/20 rounded-full animate-parallax-float"></div>
-                  <div
-                    className="absolute -bottom-8 -left-8 w-16 h-16 bg-primary/20 rounded-full animate-parallax-float"
-                    style={{ animationDelay: "2s" }}
-                  ></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* New 'What Makes Us Different' Section (Table Layout) */}
-      <section className="section-spacing-lg bg-gradient-to-br from-primary/5 via-white to-accent/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20 scroll-reveal">
-            <h2 className="text-6xl sm:text-7xl font-bold text-foreground mb-4 text-balance">
-              What Makes Our Services Superior?
-            </h2>
-            <p className="text-2xl text-muted-foreground max-w-4xl mx-auto text-pretty leading-relaxed">
-              A comprehensive, culturally-aware platform designed specifically for students in India.
-            </p>
-          </div>
-
-          <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl border-primary/10 scroll-reveal">
-            <div className="grid grid-cols-5 items-center font-bold text-lg text-center border-b-2 border-border/50">
-              <div className="col-span-3 text-left p-6">Feature</div>
-              <div className="p-6 bg-primary text-primary-foreground rounded-tr-2xl">Peace Code</div>
-              <div className="p-6 text-muted-foreground">Others</div>
-            </div>
-
-            {[
-              { feature: "24/7 AI First-Aid & Support", peaceCode: true, others: false },
-              { feature: "Culturally-Aware Care for India", peaceCode: true, others: false },
-              { feature: "Holistic Wellness Suite (Journal, Breathe, etc.)", peaceCode: true, others: false },
-              { feature: "Moderated & Anonymous Peer Community", peaceCode: true, others: true },
-              { feature: "Advanced Screening Tools", peaceCode: true, others: false },
-              { feature: "Personalized Growth Journeys", peaceCode: true, others: false },
-              { feature: "Proactive Mental Health Check-ins", peaceCode: true, others: false },
-            ].map((item, index) => (
-              <div key={index} className="grid grid-cols-5 items-center border-t border-border/50">
-                <div className="col-span-3 p-6 text-foreground/90 font-medium">
-                  {item.feature}
-                </div>
-                <div className="flex justify-center items-center p-6 bg-primary text-primary-foreground h-full">
-                  {item.peaceCode ? <Check className="h-8 w-8 text-white" /> : <X className="h-8 w-8 text-white/50" />}
-                </div>
-                <div className="flex justify-center items-center p-6">
-                  {item.others ? <Check className="h-8 w-8 text-primary" /> : <X className="h-8 w-8 text-red-400" />}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* PeaceCode vs Other Platforms Section */}
       {/* Parallax Section with static background image instead of video */}
       <section
         className="parallax-section relative min-h-screen flex items-center justify-center"
@@ -442,67 +303,6 @@ function HomePage() {
           </Button>
         </div>
       </section>
-
-      {/* Testimonials & Stories Section */}
-      <section className="section-spacing-lg bg-gradient-to-br from-accent/5 via-white to-primary/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-24 scroll-reveal">
-            <h2 className="text-6xl font-bold text-foreground mb-8">
-              Stories of <span className="text-primary">Healing</span>
-            </h2>
-            <p className="text-2xl text-muted-foreground max-w-4xl mx-auto">
-              Real experiences from students who found their path to wellness
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              {
-                quote:
-                  "Peace Code helped me through my darkest moments. The AI support was there when I needed it most, and the breathing exercises became my daily ritual.",
-                author: "Priya, Engineering Student",
-                location: "Mumbai",
-                image: "/peaceful-young-woman-student-smiling-hope-recovery.jpg",
-              },
-              {
-                quote:
-                  "The community support and professional counseling changed my perspective on mental health. I'm no longer afraid to seek help.",
-                author: "Arjun, Medical Student",
-                location: "Delhi",
-                image: "/confident-young-man-student-mental-health-recovery.jpg",
-              },
-              {
-                quote:
-                  "Having resources in my regional language made all the difference. Finally, mental health support that understands my culture.",
-                author: "Meera, Arts Student",
-                location: "Chennai",
-                image: "/happy-young-woman-student-cultural-diversity-menta.jpg",
-              },
-            ].map((testimonial, index) => (
-              <Card
-                key={index}
-                className="p-8 bg-white/80 backdrop-blur-sm border-primary/10 hover:shadow-2xl transition-all duration-500 scroll-reveal"
-              >
-                <div className="mb-6">
-                  <img
-                    src={testimonial.image || "/placeholder.svg"}
-                    alt={testimonial.author}
-                    className="w-20 h-20 rounded-full object-cover mx-auto mb-4"
-                  />
-                </div>
-                <blockquote className="text-lg text-muted-foreground mb-6 italic leading-relaxed">
-                  "{testimonial.quote}"
-                </blockquote>
-                <div className="text-center">
-                  <div className="font-semibold text-foreground">{testimonial.author}</div>
-                  <div className="text-sm text-muted-foreground">{testimonial.location}</div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Professional Support Section */}
       <section className="section-spacing bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -564,6 +364,23 @@ function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Meet Our Psychologists - Expandable Cards Section */}
+      <section className="py-16 bg-gradient-to-b from-white to-sky-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+          <div className="text-center scroll-reveal">
+            <h2 className="text-5xl sm:text-6xl font-bold text-foreground mb-6">
+              Meet Our <span className="text-primary">Expert Team</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Click on a psychologist to open their profile (and use “Talk to them” to start a conversation).
+            </p>
+          </div>
+        </div>
+        
+        {/* Full-width expandable cards - border to border */}
+        <ExpandCards />
       </section>
 
       {/* Community & Resources Section */}

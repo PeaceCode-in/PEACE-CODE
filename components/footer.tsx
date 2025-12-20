@@ -21,9 +21,9 @@ const sections = [
       { href: "/counseling", label: "Counseling" },
       { href: "/ai-support", label: "AI Chatbot" },
       { href: "/community", label: "Community" },
-      { href: "/focus", label: "Focus Timer" },
-      { href: "/breathe", label: "Breathing" },
-      { href: "/gratitude", label: "Gratitude Wall" },
+      { href: "/focus-timer", label: "Focus Timer" },
+      { href: "/breath-pacer", label: "Breathing" },
+      { href: "/gratitude-wall", label: "Gratitude Wall" },
       { href: "/journal", label: "Journal" },
       { href: "/screening", label: "Screening" },
       { href: "/resources", label: "Resources" },
@@ -84,21 +84,41 @@ export function Footer() {
         <div className="md:col-span-3 flex flex-col items-start md:items-end gap-6">
           <div>
             <p className="font-medium mb-2 max-w-xs">Build a good life for yourself with Peace Code</p>
-            <img src="/placeholder.svg" alt="Award badge" className="h-12 mb-4" />
+            {/* Award / recognition badge (replace with your own if available) */}
+            <img src="https://img.icons8.com/color/96/prize.png" alt="Award badge" className="h-12 mb-4" />
+            {/* Mobile app store badges */}
             <div className="space-y-3">
-              <img src="/placeholder.svg" alt="Google Play" className="h-10" />
-              <img src="/placeholder.svg" alt="App Store" className="h-10" />
+              <img
+                src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                alt="Get it on Google Play"
+                className="h-12 w-auto"
+              />
+              <img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Download on the App Store"
+                className="h-12 w-auto"
+              />
             </div>
           </div>
         </div>
       </div>
 
       {/* certifications */}
+      {/* compliance / certifications - swap placeholders for real logos when available */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-wrap justify-center gap-8">
         {[
-          { src: "/placeholder-logo.png", alt: "ISO" },
-          { src: "/placeholder-logo.png", alt: "HIPAA" },
-          { src: "/placeholder-logo.png", alt: "EU" },
+          {
+            src: "https://img.icons8.com/ios-filled/100/26e07f/iso.png",
+            alt: "ISO Certified",
+          },
+          {
+            src: "/Logo-HIPAA_We-Respect-Patient-Rights.png",
+            alt: "HIPAA Compliant",
+          },
+          {
+            src: "https://img.icons8.com/color/96/europe.png",
+            alt: "EU GDPR Ready",
+          },
         ].map((c) => (
           <img key={c.alt} src={c.src} alt={c.alt} className="h-12 opacity-80" />
         ))}
