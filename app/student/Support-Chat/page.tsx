@@ -160,11 +160,6 @@ export default function SupportChatPage() {
     { icon: BookOpen, label: "Resources", badge: null },
   ];
 
-  const integrationItems = [
-    { icon: Brain, label: "AI Support", color: "#2943D6" },
-    { icon: Wind, label: "Breathing", color: "#13CD3C" },
-    { icon: Timer, label: "Focus Timer", color: "#8B5CD6" },
-  ];
 
   return (
     <div className="min-h-screen bg-[#F5F6FA] flex">
@@ -231,32 +226,7 @@ export default function SupportChatPage() {
           ))}
 
           {/* Integrations Section */}
-          <div className="pt-6">
-            <p className="px-3 text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">
-              Wellness Tools
-            </p>
-            {integrationItems.map((item, index) => (
-              <button
-                key={index}
-                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
-              >
-                <div
-                  className="w-5 h-5 rounded flex items-center justify-center"
-                  style={{ backgroundColor: `${item.color}15` }}
-                >
-                  <item.icon
-                    className="h-3.5 w-3.5"
-                    style={{ color: item.color }}
-                  />
-                </div>
-                <span>{item.label}</span>
-              </button>
-            ))}
-            <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-50 transition-colors">
-              <Plus className="h-5 w-5" />
-              <span>Add new tool</span>
-            </button>
-          </div>
+          
         </nav>
 
         {/* Bottom Section */}
