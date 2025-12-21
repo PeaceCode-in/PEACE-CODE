@@ -427,7 +427,7 @@ export function Navigation() {
                 </SearchModal>
               )}
               <ModeToggle />
-              <NavbarButton href="/auth/simple-login" variant="primary" className="hidden md:inline-flex">
+              <NavbarButton href="/auth/login" variant="primary" className="hidden md:inline-flex">
                 Student Dashboard
               </NavbarButton>
             </div>

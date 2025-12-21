@@ -8,6 +8,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useContext } from "react"
 import { 
   Heart, 
   Brain, 
@@ -81,11 +82,7 @@ export default function LoginPage() {
     e.preventDefault()
     setIsLoading(true)
     setError(null)
-    
-    // Simulate API call
-    setTimeout(() => {
-      router.push("/")
-    }, 1500)
+    router.push("/student/mental-health-dashboard")
   }
 
   const inputVariants = {
