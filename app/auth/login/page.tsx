@@ -82,7 +82,7 @@ export default function LoginPage() {
     e.preventDefault()
     setIsLoading(true)
     setError(null)
-    router.push("/student/mental-health-dashboard")
+    router.push("/student/Dashboard")
   }
 
   const inputVariants = {

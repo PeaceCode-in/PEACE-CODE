@@ -59,6 +59,7 @@
     "next-themes": "latest",
     "ogl": "^1.0.11",
     "react": "^18",
+    "react-chart": "^0.0.1",
     "react-day-picker": "latest",
     "react-dom": "^18",
     "react-hook-form": "latest",
