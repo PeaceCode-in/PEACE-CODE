@@ -31,6 +31,18 @@
 - ✅ Updated `netlify.toml` NODE_VERSION to "20"
 - This ensures Netlify uses Node 20 which satisfies all dependency requirements
 
+### Fix 3: Missing Peer Dependency (react-is)
+**Error:** `Module not found: Can't resolve 'react-is'` during build, in recharts/util/ReactUtils.js
+**Error Details:** Build failed at `./node_modules/recharts/es6/util/ReactUtils.js` when importing recharts
+
+**Root Cause:** `react-is` is a peer dependency required by `recharts`, but was not explicitly listed in package.json dependencies.
+
+**Fix Applied:**
+- ✅ Installed `react-is` as a dependency: `npm install react-is --save`
+- ✅ Added to package.json dependencies
+- ✅ Local build test: **SUCCESS** ✅
+- This ensures recharts can resolve its peer dependency during build
+
 ## 🔍 How to Get Full Error Logs from Netlify
 
 The logs you provided only show the beginning (downloading Node.js). To see the actual error:
@@ -139,9 +151,11 @@ The build environment should match:
 - Ensure package-lock.json is committed (it is now)
 - Ensure only one lock file exists (no pnpm-lock.yaml or yarn.lock if using npm)
 
-**Issue: "Next.js build failed"**
-- Solution: Check specific Next.js error in the logs
+**Issue: "Next.js build failed" or "Module not found: Can't resolve 'X'"**
+- Solution: ✅ Fixed - Added react-is (required by recharts)
+- Check specific Next.js error in the logs
 - Verify all imports are correct
+- Check for missing peer dependencies (install required packages)
 - Check for TypeScript errors (disabled in next.config.mjs)
 
 **Issue: "Plugin @netlify/plugin-nextjs not found"**
