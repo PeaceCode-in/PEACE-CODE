@@ -203,15 +203,22 @@ export default function LoginPage() {
                   <Sparkles className="w-10 h-10 text-green-300" />
                 </motion.div>
 
-                {/* Text */}
-                <motion.h2 
-                  className="text-4xl font-bold text-white text-center"
+                {/* Logo */}
+                <motion.div 
+                  className="text-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1 }}
                 >
-                  Peace Code
-                </motion.h2>
+                  <Link href="/">
+                    <img 
+                      src="/logo.png.png" 
+                      alt="Peace Code Logo" 
+                      className="h-16 w-auto mx-auto object-contain"
+                      style={{ maxWidth: '250px' }}
+                    />
+                  </Link>
+                </motion.div>
                 <motion.p 
                   className="text-xl text-purple-200 text-center max-w-sm"
                   initial={{ opacity: 0 }}
@@ -269,10 +276,14 @@ export default function LoginPage() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <div className="flex justify-center mb-4">
-              <Heart className="w-12 h-12 text-purple-500" />
-            </div>
-            <h1 className="text-2xl font-bold text-white">Peace Code</h1>
+            <Link href="/" className="inline-block">
+              <img 
+                src="/logo.png.png" 
+                alt="Peace Code Logo" 
+                className="h-12 w-auto mx-auto object-contain"
+                style={{ maxWidth: '200px' }}
+              />
+            </Link>
           </motion.div>
 
           {/* Tab Switcher */}

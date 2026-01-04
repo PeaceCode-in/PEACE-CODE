@@ -1,6 +1,6 @@
 "use client"
 
-import { Navigation } from "@/components/navigation"
+import { Header } from "@/components/ui/header-2"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -77,7 +77,7 @@ function HomePage() {
 
   return (
     <div className="min-h-screen w-full relative bg-white">
-      <Navigation />
+      <Header />
 
       {/* Hero Section */}
       <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-20">
@@ -89,7 +89,7 @@ function HomePage() {
             backgroundImage: `
               radial-gradient(
                 circle at top center,
-                rgba(70, 130, 180, 0.3),
+                rgba(50, 50, 86, 0.5),
                 transparent 70%
               )
             `,
@@ -153,11 +153,11 @@ function HomePage() {
                   }}
                 />
                 {/* Glow effect around image */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-transparent to-transparent rounded-full blur-3xl -z-10 animate-pulse-slow" />
+                <div className="absolute inset-0 rounded-full blur-3xl -z-10 animate-pulse-slow" style={{ background: 'linear-gradient(to right, rgba(50, 50, 86, 0.4), transparent, transparent)' }} />
                 {/* Additional floating particles effect */}
-                <div className="absolute top-10 right-10 w-4 h-4 bg-blue-400/30 rounded-full blur-sm animate-float" style={{ animationDelay: "1s" }} />
-                <div className="absolute bottom-20 left-10 w-6 h-6 bg-blue-300/20 rounded-full blur-md animate-float" style={{ animationDelay: "2s" }} />
-                <div className="absolute top-1/2 right-20 w-3 h-3 bg-blue-500/40 rounded-full blur-sm animate-float" style={{ animationDelay: "0.5s" }} />
+                <div className="absolute top-10 right-10 w-4 h-4 rounded-full blur-sm animate-float" style={{ backgroundColor: 'rgba(50, 50, 86, 0.5)', animationDelay: "1s" }} />
+                <div className="absolute bottom-20 left-10 w-6 h-6 rounded-full blur-md animate-float" style={{ backgroundColor: 'rgba(50, 50, 86, 0.4)', animationDelay: "2s" }} />
+                <div className="absolute top-1/2 right-20 w-3 h-3 rounded-full blur-sm animate-float" style={{ backgroundColor: 'rgba(50, 50, 86, 0.6)', animationDelay: "0.5s" }} />
               </div>
             </div>
           </div>

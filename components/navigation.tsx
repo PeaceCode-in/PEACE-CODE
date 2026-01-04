@@ -42,6 +42,25 @@ import {
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
 
+// Logo component with fallback
+function LogoImage({ size }: { size: number }) {
+  const [logoError, setLogoError] = useState(false)
+  
+  if (logoError) {
+    return <Heart className={`h-${size} w-${size} text-sky-700`} style={{ height: size, width: size }} />
+  }
+  
+  return (
+    <img
+      src="/logo.png.png"
+      alt="Peace Code Logo"
+      className="object-contain"
+      style={{ height: size, width: 'auto', maxWidth: '600px', minHeight: size }}
+      onError={() => setLogoError(true)}
+    />
+  )
+}
+
 // Search data for the website
 const searchData: CommandItemType[] = [
   // Navigation
@@ -380,9 +399,8 @@ export function Navigation() {
         {/* Desktop Navigation */}
         <div className="hidden md:block">
           <NavBody>
-            <NavbarLogo className="z-10">
-              <Heart className="h-8 w-8 text-sky-700" />
-              <span className="text-2xl font-bold text-gray-900">Peace Code</span>
+            <NavbarLogo href="/" className="z-10">
+              <LogoImage size={144} />
             </NavbarLogo>
 
             {/* Keep existing mega-menu hover behavior */}
@@ -438,9 +456,8 @@ export function Navigation() {
         <MobileNav>
           <NavBody>
             <MobileNavHeader>
-              <NavbarLogo className="z-10">
-                <Heart className="h-7 w-7 text-sky-700" />
-                <span className="text-xl font-bold text-gray-900">Peace Code</span>
+              <NavbarLogo href="/" className="z-10">
+                <LogoImage size={112} />
               </NavbarLogo>
 
               <div className="flex items-center gap-2">

@@ -39,7 +39,7 @@ export function Navbar({ children, className, shrinkAfter = 12 }: NavbarProps) {
         className={cn("fixed top-0 inset-x-0 z-50", className)}
         initial={false}
         animate={{
-          height: scrolled ? 64 : 80,
+          height: scrolled ? 100 : 120,
         }}
         transition={{ type: "spring", stiffness: 260, damping: 26 }}
       >

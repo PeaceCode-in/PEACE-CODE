@@ -27,9 +27,13 @@ export default function SignupPage() {
       <div className="w-full max-w-md space-y-8">
         {/* Logo */}
         <div className="text-center">
-          <Link href="/" className="inline-flex items-center space-x-2">
-            <Heart className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold text-foreground">Peace Code</span>
+          <Link href="/" className="inline-block">
+            <img 
+              src="/logo.png.png" 
+              alt="Peace Code Logo" 
+              className="h-12 w-auto mx-auto object-contain"
+              style={{ maxWidth: '200px' }}
+            />
           </Link>
           <p className="mt-2 text-muted-foreground">Join our supportive community</p>
         </div>
