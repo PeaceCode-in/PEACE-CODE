@@ -5,7 +5,23 @@
 1. **Added @netlify/plugin-nextjs to package.json** - The plugin is now in devDependencies
 2. **Updated netlify.toml** - Added NPM_FLAGS and functions configuration
 3. **Ensured package-lock.json is committed** - For reproducible builds
-4. **Pushed all changes to GitHub** - Ready for Netlify to pick up
+4. **Removed pnpm-lock.yaml** - Having both package-lock.json and pnpm-lock.yaml can cause dependency installation conflicts on Netlify
+5. **Pushed all changes to GitHub** - Ready for Netlify to pick up
+
+## 🚨 Recent Fix: Dependency Installation Failure
+
+**Error:** `Failed during stage 'Install dependencies': dependency_installation script returned non-zero exit code: 1`
+
+**Root Cause:** The project had both `package-lock.json` (npm) and `pnpm-lock.yaml` (pnpm) lock files. Netlify detected conflicting package managers, causing the dependency installation to fail.
+
+**Fix Applied:**
+- Removed `pnpm-lock.yaml` since the project uses npm (as specified in netlify.toml)
+- This ensures Netlify uses npm consistently for dependency installation
+
+**Next Steps:**
+1. Commit the removal of pnpm-lock.yaml
+2. Clear Netlify build cache (Site settings → Build & deploy → Clear cache)
+3. Trigger a new deployment
 
 ## 🔍 How to Get Full Error Logs from Netlify
 
@@ -32,8 +48,10 @@ The actual error will appear after line 12. Look for lines containing:
 #### If you see "Cannot find module @netlify/plugin-nextjs":
 ✅ **FIXED** - The plugin is now in package.json
 
-#### If you see "npm ERR!" during install:
+#### If you see "npm ERR!" during install or "dependency_installation script returned non-zero exit code: 1":
+- ✅ **FIXED** - Removed pnpm-lock.yaml (conflict with package-lock.json)
 - Check if package-lock.json exists (it does)
+- Ensure only ONE lock file exists: package-lock.json (npm) OR yarn.lock (yarn) OR pnpm-lock.yaml (pnpm)
 - Try clearing Netlify cache and redeploy
 
 #### If you see "Build error" or Next.js errors:
@@ -83,19 +101,35 @@ The build environment should match:
 
 ## 🆘 If Build Still Fails
 
-### Get the Full Error Log:
-1. In Netlify, go to Deploys → Failed deployment
-2. Scroll to find the error (usually after "Starting to install dependencies")
-3. Copy the error lines (from the error start to the end)
-4. Share those specific error lines for further diagnosis
+### Get the Full Error Log from Netlify:
+1. Go to [Netlify Dashboard](https://app.netlify.com/)
+2. Select your site
+3. Click on **"Deploys"** tab
+4. Click on the **failed deployment** (red X icon)
+5. Click **"Show deploy log"** or scroll down to see the full log
+6. **Copy 20-30 lines BEFORE the error** and **20-30 lines AFTER the error** (include context)
+7. Look for these error indicators:
+   - Lines starting with `npm ERR!`
+   - Lines containing `Error:` or `ERROR`
+   - Lines with `failed` or `Failed`
+   - Lines with stack traces or file paths
+8. Paste the complete error section here for diagnosis
+
+**What to include:**
+- The command that failed (e.g., "Installing dependencies", "Building site")
+- The error message (e.g., "npm ERR! code ELIFECYCLE")
+- Any stack traces or file paths mentioned
+- The exit code if shown
 
 ### Common Issues and Solutions:
 
 **Issue: "package.json: No such file or directory"**
 - Solution: Verify repository is correctly linked in Netlify
 
-**Issue: "npm ci failed"**
-- Solution: Ensure package-lock.json is committed (it is now)
+**Issue: "npm ci failed" or "dependency_installation script returned non-zero exit code: 1"**
+- Solution: ✅ Fixed - Removed conflicting pnpm-lock.yaml file
+- Ensure package-lock.json is committed (it is now)
+- Ensure only one lock file exists (no pnpm-lock.yaml or yarn.lock if using npm)
 
 **Issue: "Next.js build failed"**
 - Solution: Check specific Next.js error in the logs
@@ -130,11 +164,29 @@ However, the plugin is recommended for better Next.js support.
 
 ✅ Plugin added to package.json
 ✅ Configuration updated
+✅ Removed pnpm-lock.yaml (dependency conflict fix)
+✅ Local build test: **SUCCESS** (build works locally)
 ✅ Changes pushed to GitHub
 ⏳ Waiting for Netlify to rebuild
 📋 Need full error logs if build still fails
 
 ---
 
-**Next Action:** Trigger a new deployment in Netlify and check the full build logs to see the actual error.
+## 🔍 Current Status
+
+**Local Build Status:** ✅ **PASSING**
+- `npm ci` - ✅ Works (warnings about Node version, but completes)
+- `npm run build` - ✅ Works (build completes successfully)
+
+**Note:** Your local Node version is v22.19.0, but package.json specifies Node 18.x. Netlify uses Node 18 (as configured), so this should be fine for Netlify.
+
+**Next Action:** 
+1. If build still fails on Netlify, get the full error log using the steps above
+2. The error is likely environment-specific (Netlify vs local)
+3. Common Netlify-specific issues:
+   - Environment variables missing
+   - Build timeout (increase in settings)
+   - Memory limits
+   - Missing files in git (check .gitignore)
+   - Node version mismatch (should be fine - Netlify uses 18.x as specified)
 
