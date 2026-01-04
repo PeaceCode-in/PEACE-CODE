@@ -8,20 +8,28 @@
 4. **Removed pnpm-lock.yaml** - Having both package-lock.json and pnpm-lock.yaml can cause dependency installation conflicts on Netlify
 5. **Pushed all changes to GitHub** - Ready for Netlify to pick up
 
-## 🚨 Recent Fix: Dependency Installation Failure
+## 🚨 Recent Fixes Applied
 
+### Fix 1: Dependency Installation Failure
 **Error:** `Failed during stage 'Install dependencies': dependency_installation script returned non-zero exit code: 1`
 
 **Root Cause:** The project had both `package-lock.json` (npm) and `pnpm-lock.yaml` (pnpm) lock files. Netlify detected conflicting package managers, causing the dependency installation to fail.
 
 **Fix Applied:**
-- Removed `pnpm-lock.yaml` since the project uses npm (as specified in netlify.toml)
+- ✅ Removed `pnpm-lock.yaml` since the project uses npm (as specified in netlify.toml)
 - This ensures Netlify uses npm consistently for dependency installation
 
-**Next Steps:**
-1. Commit the removal of pnpm-lock.yaml
-2. Clear Netlify build cache (Site settings → Build & deploy → Clear cache)
-3. Trigger a new deployment
+### Fix 2: Node Version Mismatch
+**Error:** `Failed during stage 'building site': Build script returned non-zero exit code: 2`
+**Error Details:** `npm warn EBADENGINE` for `type-fest@5.3.1` and `wsl-utils@0.3.0` requiring Node >=20, but build was using Node v18.20.8
+
+**Root Cause:** Dependencies require Node 20+, but Netlify was configured to use Node 18.
+
+**Fix Applied:**
+- ✅ Created `.nvmrc` file with Node version 20
+- ✅ Updated `package.json` engines field to `">=20"`
+- ✅ Updated `netlify.toml` NODE_VERSION to "20"
+- This ensures Netlify uses Node 20 which satisfies all dependency requirements
 
 ## 🔍 How to Get Full Error Logs from Netlify
 
@@ -178,7 +186,10 @@ However, the plugin is recommended for better Next.js support.
 - `npm ci` - ✅ Works (warnings about Node version, but completes)
 - `npm run build` - ✅ Works (build completes successfully)
 
-**Note:** Your local Node version is v22.19.0, but package.json specifies Node 18.x. Netlify uses Node 18 (as configured), so this should be fine for Netlify.
+**Note:** 
+- Local Node version: v22.19.0 (works fine - higher than required)
+- Netlify Node version: Now set to 20 (matches dependency requirements)
+- Dependencies requiring Node >=20: type-fest@5.3.1, wsl-utils@0.3.0
 
 **Next Action:** 
 1. If build still fails on Netlify, get the full error log using the steps above
