@@ -6,7 +6,8 @@ import Link from "next/link"
 import { Header } from "@/components/ui/header-2"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import { RelatedLinksSection, linkSets } from "@/components/shared/RelatedLinksSection"
+import { RelatedLinksSection } from "@/components/shared/RelatedLinksSection"
+import { linkSets } from "@/components/shared/related-links-data"
 import {
   Search,
   HelpCircle,
