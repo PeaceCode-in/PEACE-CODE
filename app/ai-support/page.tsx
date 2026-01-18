@@ -1,6 +1,5 @@
 "use client"
 
-import { Navigation } from "@/components/navigation"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
@@ -80,7 +79,6 @@ const stats = [
 export default function AISupportPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Navigation />
       <main className="overflow-hidden">
         {/* Hero Section - White with dotted pattern */}
         <section className="relative min-h-screen flex items-center justify-center pt-20 bg-gradient-to-b from-[#f8fafc] to-white">

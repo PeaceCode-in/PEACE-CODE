@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { Navigation } from "@/components/navigation";
 import { WordRotate } from "@/components/breath-pacer/WordRotate";
 import { BreathingAnimation } from "@/components/breath-pacer/BreathingAnimation";
 import { BreathPacerBentoGrid } from "@/components/breath-pacer/BreathPacerBentoGrid";
@@ -155,7 +154,6 @@ export default function BreathPacerLandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f7ff] to-white">
       <Toaster richColors position="top-center" />
-      <Navigation />
 
       {/* Hero Section - White/Very Light Blue */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">

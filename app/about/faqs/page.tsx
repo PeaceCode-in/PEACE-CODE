@@ -1,17 +1,24 @@
-import { Metadata } from "next"
-import Image from "next/image"
-import { Navigation } from "@/components/navigation"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+"use client"
 
-export const metadata: Metadata = {
-  title: "FAQs | Peace Code",
-  description: "Answers to the most common questions about Peace Code’s platform, therapy services, payments, privacy and more.",
-}
+import { useState, useMemo } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import Link from "next/link"
+import { Header } from "@/components/ui/header-2"
+import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
+import { RelatedLinksSection, linkSets } from "@/components/shared/RelatedLinksSection"
+import {
+  Search,
+  HelpCircle,
+  Heart,
+  ClipboardCheck,
+  Laptop,
+  CreditCard,
+  Shield,
+  ChevronDown,
+  Sparkles,
+  MessageCircle,
+} from "lucide-react"
 
 // --- FAQ DATA -------------------------------------------------------------
 type QA = { category: string; q: string; a: string }
@@ -26,7 +33,7 @@ const faqList: QA[] = [
   {
     category: "General",
     q: "Do I have to sign up to use the website?",
-    a: "You can browse resources without an account. To access personalised tools, community forums, or book therapy sessions, you’ll need to create a free profile.",
+    a: "You can browse resources without an account. To access personalised tools, community forums, or book therapy sessions, you'll need to create a free profile.",
   },
   {
     category: "General",
@@ -76,7 +83,7 @@ const faqList: QA[] = [
   },
   {
     category: "Therapy",
-    q: "Are there concerns you don’t handle?",
+    q: "Are there concerns you don't handle?",
     a: "We currently do not treat active psychosis, severe substance dependence, or medical emergencies on the platform.",
   },
   {
@@ -107,7 +114,7 @@ const faqList: QA[] = [
   {
     category: "Therapy",
     q: "Can I switch therapists mid-way?",
-    a: "Absolutely. Your comfort is paramount. Use the Change Therapist option in your dashboard and we’ll rematch you within 48 hours.",
+    a: "Absolutely. Your comfort is paramount. Use the Change Therapist option in your dashboard and we'll rematch you within 48 hours.",
   },
   {
     category: "Therapy",
@@ -133,7 +140,7 @@ const faqList: QA[] = [
   {
     category: "Assessments",
     q: "Is taking these assessments mandatory?",
-    a: "No, they’re optional but highly recommended to track progress and personalise your care plan.",
+    a: "No, they're optional but highly recommended to track progress and personalise your care plan.",
   },
   {
     category: "Assessments",
@@ -159,7 +166,7 @@ const faqList: QA[] = [
   {
     category: "Technical",
     q: "How do I start an online session?",
-    a: "Log in, navigate to ‘My Appointments’, and click ‘Join Session’ five minutes before the scheduled time.",
+    a: "Log in, navigate to 'My Appointments', and click 'Join Session' five minutes before the scheduled time.",
   },
   {
     category: "Technical",
@@ -188,52 +195,52 @@ const faqList: QA[] = [
   },
   // Payment (10)
   {
-    category: "Payments & Refunds",
+    category: "Payments",
     q: "What is the fee for therapy?",
     a: "Single sessions start at ₹799. Package discounts and student subsidies are available.",
   },
   {
-    category: "Payments & Refunds",
+    category: "Payments",
     q: "Which payment methods do you accept?",
     a: "UPI, credit/debit cards, net banking and international cards via Stripe.",
   },
   {
-    category: "Payments & Refunds",
+    category: "Payments",
     q: "Is the payment gateway secure?",
     a: "Yes—our transactions are processed through PCI-DSS compliant providers with 256-bit encryption.",
   },
   {
-    category: "Payments & Refunds",
+    category: "Payments",
     q: "Can I pay for multiple sessions upfront?",
-    a: "Absolutely. Bundle packs offer up to 20 % savings and increase commitment to therapy.",
+    a: "Absolutely. Bundle packs offer up to 20% savings and increase commitment to therapy.",
   },
   {
-    category: "Payments & Refunds",
+    category: "Payments",
     q: "Can I reschedule a session?",
     a: "Rescheduling is free up to 12 hours before your appointment via your dashboard.",
   },
   {
-    category: "Payments & Refunds",
+    category: "Payments",
     q: "Am I eligible for a refund if I cancel?",
-    a: "Cancellations with 24-hour notice receive a full refund. Later cancellations incur a 30 % fee to compensate therapist time.",
+    a: "Cancellations with 24-hour notice receive a full refund. Later cancellations incur a 30% fee to compensate therapist time.",
   },
   {
-    category: "Payments & Refunds",
+    category: "Payments",
     q: "Can the therapist cancel?",
     a: "In rare emergencies, sessions may be moved. You will receive an immediate full refund or priority reschedule slot.",
   },
   {
-    category: "Payments & Refunds",
+    category: "Payments",
     q: "What if my session is interrupted?",
     a: "Network disruptions under 10 minutes are compensated with extra time; longer outages qualify for a free make-up session.",
   },
   {
-    category: "Payments & Refunds",
+    category: "Payments",
     q: "Do you offer EMI options?",
-    a: "Yes, for packages above ₹5,000 we partner with Razorpay EMI at 0 % interest for 3 months.",
+    a: "Yes, for packages above ₹5,000 we partner with Razorpay EMI at 0% interest for 3 months.",
   },
   {
-    category: "Payments & Refunds",
+    category: "Payments",
     q: "Can I get an invoice for insurance?",
     a: "Yes—download GST-compliant invoices from your billing history to file claims with insurers that cover tele-therapy.",
   },
@@ -275,52 +282,387 @@ const faqList: QA[] = [
   },
 ]
 
-// Group by category
+// Category configuration with icons and colors
+const categoryConfig: Record<string, { icon: typeof HelpCircle; color: string; bgColor: string }> = {
+  General: { icon: HelpCircle, color: "#FEC2E6", bgColor: "rgba(254, 194, 230, 0.15)" },
+  Therapy: { icon: Heart, color: "#C6DA83", bgColor: "rgba(198, 218, 131, 0.15)" },
+  Assessments: { icon: ClipboardCheck, color: "#4A4F87", bgColor: "rgba(74, 79, 135, 0.15)" },
+  Technical: { icon: Laptop, color: "#FEC2E6", bgColor: "rgba(254, 194, 230, 0.15)" },
+  Payments: { icon: CreditCard, color: "#C6DA83", bgColor: "rgba(198, 218, 131, 0.15)" },
+  Privacy: { icon: Shield, color: "#4A4F87", bgColor: "rgba(74, 79, 135, 0.15)" },
+}
+
+// Get unique categories
 const categories = Array.from(new Set(faqList.map((f) => f.category)))
 
-export default function FAQPage() {
+// FAQ Item Component
+function FAQItem({ faq, index }: { faq: QA; index: number }) {
+  const [isOpen, setIsOpen] = useState(false)
+  const config = categoryConfig[faq.category] || categoryConfig.General
+
   return (
-    <div className="flex flex-col">
-      <Navigation />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay: index * 0.03 }}
+    >
+      <div
+        className={cn(
+          "group rounded-2xl border transition-all duration-300 overflow-hidden",
+          "bg-white/80 backdrop-blur-sm",
+          isOpen
+            ? "border-pc-pink/40 shadow-lg shadow-pc-pink/10"
+            : "border-pc-pink/10 hover:border-pc-pink/30 hover:shadow-md"
+        )}
+      >
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full flex items-start gap-4 p-5 text-left"
+        >
+          <div
+            className="flex-shrink-0 p-2.5 rounded-xl transition-colors"
+            style={{ backgroundColor: config.bgColor }}
+          >
+            <config.icon className="w-5 h-5" style={{ color: config.color }} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className="font-semibold text-pc-navy pr-8 leading-relaxed">
+              {faq.q}
+            </h3>
+          </div>
+          <motion.div
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+            className="flex-shrink-0 mt-1"
+          >
+            <ChevronDown className="w-5 h-5 text-pc-slate" />
+          </motion.div>
+        </button>
 
-      {/* HERO */}
-      <section className="relative h-[50vh] flex items-center justify-center bg-gradient-to-b from-sky-50 to-white overflow-hidden">
-        <Image
-          src="/serene-meditation-breathing-exercise-calm-blue-atm.jpg"
-          alt="FAQs banner"
-          fill
-          priority
-          className="object-cover object-center opacity-30"
-        />
-        <h1 className="relative z-10 text-4xl sm:text-6xl font-extrabold text-sky-900 text-center drop-shadow-lg">
-          Your Mental-Health Queries Answered
-        </h1>
-      </section>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="px-5 pb-5 pt-0">
+                <div
+                  className="pl-14 pr-4 py-4 rounded-xl text-pc-slate leading-relaxed"
+                  style={{ backgroundColor: config.bgColor }}
+                >
+                  {faq.a}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  )
+}
 
-      {/* FAQ ACCORDIONS */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto space-y-14">
-          {categories.map((cat) => (
-            <div key={cat}>
-              <h2 className="text-2xl font-bold text-sky-900 mb-6">{cat}</h2>
-              <Accordion type="single" collapsible className="space-y-4">
-                {faqList
-                  .filter((f) => f.category === cat)
-                  .map((f, idx) => (
-                    <AccordionItem key={idx} value={`${cat}-${idx}`} className="border border-sky-100 rounded-xl">
-                      <AccordionTrigger className="text-sky-700 hover:text-sky-900 px-4 py-3 text-left font-medium">
-                        {f.q}
-                      </AccordionTrigger>
-                      <AccordionContent className="px-4 py-3 text-sky-600 bg-sky-50 rounded-b-xl">
-                        {f.a}
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-              </Accordion>
-            </div>
-          ))}
+export default function FAQPage() {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery] = useState("")
+
+  // Filter FAQs based on category and search
+  const filteredFAQs = useMemo(() => {
+    return faqList.filter((faq) => {
+      const matchesCategory = !activeCategory || faq.category === activeCategory
+      const matchesSearch =
+        !searchQuery ||
+        faq.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        faq.a.toLowerCase().includes(searchQuery.toLowerCase())
+      return matchesCategory && matchesSearch
+    })
+  }, [activeCategory, searchQuery])
+
+  // Group filtered FAQs by category
+  const groupedFAQs = useMemo(() => {
+    const groups: Record<string, QA[]> = {}
+    filteredFAQs.forEach((faq) => {
+      if (!groups[faq.category]) {
+        groups[faq.category] = []
+      }
+      groups[faq.category].push(faq)
+    })
+    return groups
+  }, [filteredFAQs])
+
+  return (
+    <main className="flex flex-col min-h-screen bg-pc-offwhite">
+      <Header />
+
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* Background elements */}
+        <div className="absolute inset-0 -z-10">
+          <motion.div
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute top-0 right-1/4 w-[600px] h-[600px] rounded-full bg-pc-pink/20 blur-[150px]"
+          />
+          <motion.div
+            animate={{
+              scale: [1, 1.15, 1],
+              opacity: [0.15, 0.3, 0.15],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+            className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-pc-green/15 blur-[120px]"
+          />
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-pc-pink/20 border border-pc-pink/30 text-pc-navy text-sm font-medium mb-6"
+          >
+            <Sparkles className="w-4 h-4" style={{ color: "#FEC2E6" }} />
+            <span>We're here to help</span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-pc-navy mb-6"
+          >
+            Frequently Asked{" "}
+            <span style={{ color: "#FEC2E6" }}>Questions</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl text-pc-slate max-w-2xl mx-auto mb-10"
+          >
+            Find answers to common questions about our platform, therapy services, 
+            payments, privacy, and more.
+          </motion.p>
+
+          {/* Search Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="max-w-xl mx-auto relative"
+          >
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-pc-slate" />
+            <Input
+              type="text"
+              placeholder="Search for answers..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-12 pr-4 py-6 text-base rounded-full bg-white/80 border-pc-pink/20 focus:border-pc-pink/50 focus:ring-pc-pink/20"
+            />
+          </motion.div>
         </div>
       </section>
-    </div>
+
+      {/* Category Pills */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="max-w-5xl mx-auto"
+        >
+          <div className="flex flex-wrap justify-center gap-3">
+            <button
+              onClick={() => setActiveCategory(null)}
+              className={cn(
+                "px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
+                !activeCategory
+                  ? "text-pc-navy shadow-md"
+                  : "bg-white/60 text-pc-slate hover:bg-white/80 border border-pc-pink/10"
+              )}
+              style={
+                !activeCategory
+                  ? { backgroundColor: "#FEC2E6" }
+                  : undefined
+              }
+            >
+              All Topics
+            </button>
+            {categories.map((category) => {
+              const config = categoryConfig[category]
+              const isActive = activeCategory === category
+              return (
+                <button
+                  key={category}
+                  onClick={() => setActiveCategory(isActive ? null : category)}
+                  className={cn(
+                    "flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
+                    isActive
+                      ? "text-pc-navy shadow-md"
+                      : "bg-white/60 text-pc-slate hover:bg-white/80 border border-pc-pink/10"
+                  )}
+                  style={
+                    isActive
+                      ? { backgroundColor: config.color }
+                      : undefined
+                  }
+                >
+                  <config.icon className="w-4 h-4" />
+                  {category}
+                </button>
+              )
+            })}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* FAQ List */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-24">
+        <div className="max-w-4xl mx-auto">
+          {filteredFAQs.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-16"
+            >
+              <div
+                className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4"
+                style={{ backgroundColor: "rgba(254, 194, 230, 0.2)" }}
+              >
+                <Search className="w-8 h-8" style={{ color: "#FEC2E6" }} />
+              </div>
+              <h3 className="text-xl font-semibold text-pc-navy mb-2">
+                No results found
+              </h3>
+              <p className="text-pc-slate">
+                Try adjusting your search or browse all categories.
+              </p>
+            </motion.div>
+          ) : activeCategory ? (
+            // Single category view
+            <div className="space-y-4">
+              {filteredFAQs.map((faq, index) => (
+                <FAQItem key={`${faq.category}-${index}`} faq={faq} index={index} />
+              ))}
+            </div>
+          ) : (
+            // Grouped by category view
+            <div className="space-y-12">
+              {Object.entries(groupedFAQs).map(([category, faqs]) => {
+                const config = categoryConfig[category]
+                return (
+                  <motion.div
+                    key={category}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <div className="flex items-center gap-3 mb-6">
+                      <div
+                        className="p-3 rounded-xl"
+                        style={{ backgroundColor: config.bgColor }}
+                      >
+                        <config.icon className="w-6 h-6" style={{ color: config.color }} />
+                      </div>
+                      <h2 className="text-2xl font-bold text-pc-navy">{category}</h2>
+                      <span
+                        className="px-3 py-1 rounded-full text-xs font-medium"
+                        style={{ backgroundColor: config.bgColor, color: config.color }}
+                      >
+                        {faqs.length} questions
+                      </span>
+                    </div>
+                    <div className="space-y-4">
+                      {faqs.map((faq, index) => (
+                        <FAQItem key={`${category}-${index}`} faq={faq} index={index} />
+                      ))}
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Still have questions CTA */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx-auto"
+        >
+          <div
+            className="relative rounded-3xl p-8 sm:p-12 overflow-hidden"
+            style={{ backgroundColor: "#0F1455" }}
+          >
+            {/* Background decoration */}
+            <div
+              className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[100px] opacity-30"
+              style={{ backgroundColor: "#FEC2E6" }}
+            />
+            <div
+              className="absolute bottom-0 left-0 w-48 h-48 rounded-full blur-[80px] opacity-20"
+              style={{ backgroundColor: "#C6DA83" }}
+            />
+
+            <div className="relative z-10 text-center">
+              <div
+                className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6"
+                style={{ backgroundColor: "rgba(254, 194, 230, 0.2)" }}
+              >
+                <MessageCircle className="w-8 h-8" style={{ color: "#FEC2E6" }} />
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                Still have questions?
+              </h3>
+              <p className="text-white/70 max-w-lg mx-auto mb-8">
+                Can't find what you're looking for? Our support team is here to help 
+                you with any questions or concerns.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href="mailto:support@peacecode.in"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all hover:scale-105"
+                  style={{ backgroundColor: "#FEC2E6", color: "#0F1455" }}
+                >
+                  Contact Support
+                </a>
+                <Link
+                  href="/about/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold border border-white/20 text-white hover:bg-white/10 transition-all"
+                >
+                  Contact Us
+                </Link>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Related Links */}
+      <RelatedLinksSection
+        title="Explore More"
+        subtitle="Helpful resources and pages"
+        bentoLinks={linkSets.faqs.bentoLinks}
+        quickLinks={linkSets.faqs.quickLinks}
+      />
+    </main>
   )
 }

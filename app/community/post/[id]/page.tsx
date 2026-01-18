@@ -1,4 +1,3 @@
-import { Navigation } from "@/components/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { PostComment } from "@/components/community/post-comment"
@@ -58,7 +57,6 @@ const comments = [
 export default function PostPage({ params }: { params: { id: string } }) {
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
 
       <div className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">

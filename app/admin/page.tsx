@@ -1,4 +1,3 @@
-import { Navigation } from "@/components/navigation"
 import { AdminDashboard } from "@/components/admin/admin-dashboard"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { BarChart3, Users, TrendingUp, Shield, AlertTriangle, Target } from "lucide-react"
@@ -6,7 +5,6 @@ import { BarChart3, Users, TrendingUp, Shield, AlertTriangle, Target } from "luc
 export default function AdminPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
 
       <div className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">

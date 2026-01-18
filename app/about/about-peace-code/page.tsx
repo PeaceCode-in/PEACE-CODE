@@ -1,7 +1,6 @@
 "use client"
 
 import { Metadata } from "next"
-import { Navigation } from "@/components/navigation"
 import { Separator } from "@/components/ui/separator"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -156,7 +155,6 @@ export default function AboutPeaceCodePage() {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <Navigation />
 
       {/* Animated Background Elements */}
       <div 

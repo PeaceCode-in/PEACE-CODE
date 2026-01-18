@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Navigation } from "@/components/navigation"
 import { AIChatbot } from "@/components/ai-support/ai-chatbot"
 import { FullscreenChat } from "@/components/ai-support/fullscreen-chat"
 import { Button } from "@/components/ui/button"
@@ -48,8 +47,6 @@ export default function AIChatPage() {
             }}
           />
         </div>
-
-        <Navigation />
         
         <main className="relative z-10 pt-20 pb-8 px-4 sm:px-6 lg:px-8 min-h-screen">
           <div className="max-w-7xl mx-auto">

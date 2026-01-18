@@ -2,7 +2,6 @@ import { categories } from "@/lib/community-data"
 import { GroupSidebar } from "@/components/community/group-sidebar"
 import { ChatInterface } from "@/components/community/chat-interface"
 import { notFound } from "next/navigation"
-import { Navigation } from "@/components/navigation"
 
 export default function GroupChatPage({ params }: { params: { id: string } }) {
   const group = categories.find((c) => c.id === params.id)
@@ -15,7 +14,6 @@ export default function GroupChatPage({ params }: { params: { id: string } }) {
 
   return (
     <div className="h-screen flex flex-col">
-      <Navigation />
       <div className="flex-1 grid grid-cols-[280px_1fr] overflow-hidden pt-16">
         <GroupSidebar />
         <ChatInterface groupId={group.id as any} groupName={group.name} />

@@ -1,6 +1,5 @@
 "use client"
 
-import { Navigation } from "@/components/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -278,7 +277,6 @@ export default function ResourcesPage() {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <Navigation />
 
       {/* Animated Background Elements */}
       <div 

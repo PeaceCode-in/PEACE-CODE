@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Navigation } from "@/components/navigation";
 import {
   GratitudeTree,
   GratitudeCard,
@@ -118,7 +117,6 @@ export default function GratitudeWallPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f9ff] to-white">
-      <Navigation />
       <Toaster richColors position="top-center" />
 
       {/* Subtle grid pattern */}

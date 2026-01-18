@@ -1,0 +1,7 @@
+export { ContactHero } from "./ContactHero"
+export { ContactBento } from "./ContactBento"
+export { ContactForm } from "./ContactForm"
+export { TerminalCard } from "./TerminalCard"
+export { RelatedLinks, FooterStrip } from "./RelatedLinks"
+export * from "./contact-config"
+export * from "./schema"

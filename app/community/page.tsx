@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Navigation } from "@/components/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CommunityPost } from "@/components/community/community-post"
@@ -70,7 +69,6 @@ export default function CommunityPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
 
       {/* New Hero Section */}
       <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">

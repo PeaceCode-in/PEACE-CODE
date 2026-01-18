@@ -1,4 +1,3 @@
-import { Navigation } from "@/components/navigation"
 import { ScreeningHub } from "@/components/screening/screening-hub"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Brain, ClipboardList, TrendingUp, Shield, AlertTriangle, CheckCircle, HelpCircle, ChevronRight, Crown } from "lucide-react"
@@ -119,7 +118,6 @@ const faqs = [
 export default function ScreeningPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <Navigation />
 
       <main className="pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

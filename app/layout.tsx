@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   keywords: ["mental health", "student support", "AI counseling", "peer community", "wellness", "India"],
   authors: [{ name: "JAI MANN" }],
   creator: "JAI MANN",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
   openGraph: {
     title: "Peace Code - Your Digital Sanctuary for Mental Wellness",
     description:

@@ -2,7 +2,6 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { Navigation } from "@/components/navigation";
 import { 
   AnimatedTimer, 
   SoundscapeCard, 
@@ -115,7 +114,6 @@ export default function FocusTimerLandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-[#f0f7ff] to-white">
       <Toaster richColors position="top-center" />
-      <Navigation />
 
       {/* Subtle grid pattern background */}
       <div 

@@ -1,4 +1,3 @@
-import { Navigation } from "@/components/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { CounselorCard } from "@/components/counseling/counselor-card"
@@ -79,7 +78,6 @@ const services = [
 export default function CounselingPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
 
       {/* New Hero Section */}
       <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
