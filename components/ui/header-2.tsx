@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
 import { useScroll } from '@/components/ui/use-scroll';
 import { ModeToggle } from '@/components/mode-toggle';
+import { LoginMenu } from '@/components/ui/login-menu';
 
 // Logo component with fallback
 function LogoImage({ size }: { size: number }) {
@@ -73,9 +74,7 @@ export function Header() {
 						</Link>
 					))}
 					<ModeToggle />
-					<Button variant="outline" asChild>
-						<Link href="/auth/simple-login">Student Dashboard</Link>
-					</Button>
+					<LoginMenu />
 				</div>
 				<div className="flex items-center gap-2 md:hidden">
 					<ModeToggle />
@@ -111,9 +110,7 @@ export function Header() {
 						))}
 					</div>
 					<div className="flex flex-col gap-2">
-						<Button variant="outline" className="w-full" asChild>
-							<Link href="/auth/simple-login">Student Dashboard</Link>
-						</Button>
+						<LoginMenu className="w-full justify-center" />
 					</div>
 				</div>
 			</div>

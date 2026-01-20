@@ -2,6 +2,7 @@
 
 import { Header } from "@/components/ui/header-2"
 import { Button } from "@/components/ui/button"
+import { LoginMenu } from "@/components/ui/login-menu"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { GetStartedButton } from "@/components/ui/get-started-button"
@@ -118,17 +119,11 @@ function HomePage() {
 
               <div className="pt-4 flex flex-wrap gap-4">
                 <GetStartedButton href="/ai-support" />
-                <Button 
-                  size="lg" 
-                  variant="outline"
+                <LoginMenu
+                  label="Login"
+                  buttonVariant="outline"
                   className="text-lg px-8 py-6 border-2 border-primary hover:bg-primary hover:text-white transition-all duration-300"
-                  asChild
-                >
-                  <Link href="/auth/simple-login">
-                    Student Dashboard
-                    <span className="ml-2">→</span>
-                  </Link>
-                </Button>
+                />
               </div>
             </div>
 
