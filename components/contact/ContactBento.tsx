@@ -44,10 +44,10 @@ export function ContactBento() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-pc-navy mb-3">
+          <h2 className="text-2xl sm:text-3xl font-bold font-hero mb-3" style={{ color: "#2d2d5a" }}>
             Quick Contact Options
           </h2>
-          <p className="text-pc-slate">Choose how you'd like to reach us</p>
+          <p style={{ color: "#5c5c8a" }}>Choose how you'd like to reach us</p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
@@ -59,7 +59,7 @@ export function ContactBento() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
-              <Card className="group p-6 h-full bg-white/80 backdrop-blur-sm border-pc-pink/10 hover:border-pc-pink/30 hover:shadow-xl hover:shadow-pc-pink/10 hover:-translate-y-1 transition-all duration-300">
+              <Card className="group p-6 h-full bg-white/80 backdrop-blur-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300" style={{ borderColor: "rgba(217, 217, 255, 0.5)" }}>
                 {/* Icon */}
                 <div
                   className="p-3 rounded-xl w-fit mb-4 transition-colors"
@@ -69,8 +69,8 @@ export function ContactBento() {
                 </div>
 
                 {/* Title & Description */}
-                <h3 className="font-semibold text-pc-navy mb-2">{card.title}</h3>
-                <p className="text-sm text-pc-slate mb-4">{card.description}</p>
+                <h3 className="font-semibold mb-2" style={{ color: "#2d2d5a" }}>{card.title}</h3>
+                <p className="text-sm mb-4" style={{ color: "#5c5c8a" }}>{card.description}</p>
 
                 {/* Primary action value display */}
                 {card.primaryAction.type === "copy" && (
@@ -78,7 +78,7 @@ export function ContactBento() {
                     className="flex items-center justify-between p-3 rounded-lg mb-4 font-mono text-sm"
                     style={{ backgroundColor: card.bgColor }}
                   >
-                    <span className="text-pc-navy truncate">{card.primaryAction.value}</span>
+                    <span className="truncate" style={{ color: "#2d2d5a" }}>{card.primaryAction.value}</span>
                     <button
                       onClick={() => handleAction(card.primaryAction, card.id)}
                       className="ml-2 p-1.5 rounded-md hover:bg-white/50 transition-colors"
@@ -86,7 +86,7 @@ export function ContactBento() {
                       {copiedId === card.id ? (
                         <Check className="w-4 h-4" style={{ color: card.color }} />
                       ) : (
-                        <Copy className="w-4 h-4 text-pc-slate" />
+                        <Copy className="w-4 h-4" style={{ color: "#5c5c8a" }} />
                       )}
                     </button>
                   </div>
@@ -100,7 +100,7 @@ export function ContactBento() {
                         asChild
                         size="sm"
                         className="rounded-full"
-                        style={{ backgroundColor: card.color, color: "#0F1455" }}
+                        style={{ backgroundColor: card.color, color: "#fff" }}
                       >
                         <Link href={card.primaryAction.value}>
                           {card.primaryAction.label}
@@ -111,7 +111,7 @@ export function ContactBento() {
                         size="sm"
                         onClick={() => handleAction(card.primaryAction, card.id)}
                         className="rounded-full"
-                        style={{ backgroundColor: card.color, color: "#0F1455" }}
+                        style={{ backgroundColor: card.color, color: "#fff" }}
                       >
                         {card.primaryAction.label}
                       </Button>
@@ -124,7 +124,8 @@ export function ContactBento() {
                         asChild
                         variant="outline"
                         size="sm"
-                        className="rounded-full border-pc-navy/20 text-pc-navy"
+                        className="rounded-full"
+                        style={{ borderColor: "rgba(155, 155, 255, 0.5)", color: "#2d2d5a" }}
                       >
                         <Link href={card.secondaryAction.value}>
                           {card.secondaryAction.label}
@@ -136,7 +137,8 @@ export function ContactBento() {
                         variant="outline"
                         size="sm"
                         onClick={() => handleAction(card.secondaryAction!, card.id + "-secondary")}
-                        className="rounded-full border-pc-navy/20 text-pc-navy"
+                        className="rounded-full"
+                        style={{ borderColor: "rgba(155, 155, 255, 0.5)", color: "#2d2d5a" }}
                       >
                         {card.secondaryAction.label}
                         <ExternalLink className="w-3 h-3 ml-1" />

@@ -9,7 +9,7 @@ import { Toaster } from "sonner"
 
 export function ContactPageContent() {
   return (
-    <main className="flex flex-col min-h-screen bg-pc-offwhite">
+    <main className="flex flex-col min-h-screen bg-[#fbfaff]">
       <Toaster richColors position="top-center" />
       <Header />
 

@@ -28,14 +28,14 @@ export function SectionHeading({
         className
       )}
     >
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-pc-navy mb-4">
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-hero font-semibold tracking-tight mb-4" style={{ color: "#2d2d5a" }}>
         {title}
       </h2>
       {subtitle && (
         <p className={cn(
-          "text-lg text-pc-slate max-w-2xl leading-relaxed",
+          "text-lg max-w-2xl leading-relaxed",
           align === "center" && "mx-auto"
-        )}>
+        )} style={{ color: "#5c5c8a" }}>
           {subtitle}
         </p>
       )}

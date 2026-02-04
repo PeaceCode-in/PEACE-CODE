@@ -71,8 +71,8 @@ export const bentoCards: BentoCardConfig[] = [
       value: contactInfo.emails.careers,
       type: "mailto",
     },
-    color: "#FEC2E6",
-    bgColor: "rgba(254, 194, 230, 0.15)",
+    color: "#9b9bff",
+    bgColor: "rgba(217, 217, 255, 0.2)",
   },
   {
     id: "whatsapp",
@@ -89,8 +89,8 @@ export const bentoCards: BentoCardConfig[] = [
       value: `https://wa.me/${contactInfo.whatsapp.replace(/\s/g, "")}`,
       type: "link",
     },
-    color: "#C6DA83",
-    bgColor: "rgba(198, 218, 131, 0.15)",
+    color: "#7b7bff",
+    bgColor: "rgba(176, 176, 255, 0.2)",
   },
   {
     id: "safety",
@@ -107,8 +107,8 @@ export const bentoCards: BentoCardConfig[] = [
       value: "/resources",
       type: "link",
     },
-    color: "#4A4F87",
-    bgColor: "rgba(74, 79, 135, 0.15)",
+    color: "#9b9bff",
+    bgColor: "rgba(155, 155, 255, 0.2)",
   },
 ]
 
@@ -129,7 +129,7 @@ export const relatedLinks: RelatedLinkConfig[] = [
     title: "Help Center",
     description: "Find answers to common questions",
     href: "/about/faqs",
-    color: "#FEC2E6",
+    color: "#9b9bff",
   },
   {
     id: "careers",
@@ -137,7 +137,7 @@ export const relatedLinks: RelatedLinkConfig[] = [
     title: "Careers",
     description: "Join our mission-driven team",
     href: "/about/careers",
-    color: "#C6DA83",
+    color: "#7b7bff",
   },
   {
     id: "about",
@@ -145,7 +145,7 @@ export const relatedLinks: RelatedLinkConfig[] = [
     title: "About Us",
     description: "Learn about PeaceCode's mission",
     href: "/about/about-peace-code",
-    color: "#4A4F87",
+    color: "#9b9bff",
   },
   {
     id: "resources",
@@ -153,7 +153,7 @@ export const relatedLinks: RelatedLinkConfig[] = [
     title: "Resources",
     description: "Mental wellness guides and tools",
     href: "/resources",
-    color: "#FEC2E6",
+    color: "#9b9bff",
   },
   {
     id: "privacy",
@@ -161,7 +161,7 @@ export const relatedLinks: RelatedLinkConfig[] = [
     title: "Privacy Policy",
     description: "How we protect your data",
     href: "/about/faqs",
-    color: "#C6DA83",
+    color: "#7b7bff",
   },
 ]
 

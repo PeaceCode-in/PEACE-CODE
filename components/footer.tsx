@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Facebook, Instagram, Linkedin, X } from "lucide-react"
+import { Instagram, Linkedin, Twitter } from "lucide-react"
+import { SocialLinksInline, DiscordIcon } from "@/components/ui/social-card"
 
 const sections = [
   {
@@ -136,13 +137,15 @@ export function Footer() {
             <Link href="/hall-of-fame" className="hover:text-primary">Hall of Fame</Link>
           </div>
 
-          {/* socials */}
-          <div className="flex items-center gap-4">
-            <Link href="#" aria-label="X"><X className="h-5 w-5" /></Link>
-            <Link href="#" aria-label="LinkedIn"><Linkedin className="h-5 w-5" /></Link>
-            <Link href="#" aria-label="Facebook"><Facebook className="h-5 w-5" /></Link>
-            <Link href="#" aria-label="Instagram"><Instagram className="h-5 w-5" /></Link>
-          </div>
+          {/* socials - glass design with logo color #d9d9ff */}
+          <SocialLinksInline
+            links={[
+              { href: "#", icon: <Instagram className="w-5 h-5" />, ariaLabel: "Instagram" },
+              { href: "#", icon: <Twitter className="w-5 h-5" />, ariaLabel: "X (Twitter)" },
+              { href: "#", icon: <DiscordIcon />, ariaLabel: "Discord" },
+              { href: "#", icon: <Linkedin className="w-5 h-5" />, ariaLabel: "LinkedIn" },
+            ]}
+          />
         </div>
 
         <p className="text-center text-xs text-muted-foreground mt-4 px-4 max-w-5xl mx-auto">

@@ -41,12 +41,13 @@ export function ContactHero() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-20 right-1/4 w-[500px] h-[500px] rounded-full bg-pc-pink/20 blur-[150px]"
+          className="absolute top-20 right-1/4 w-[500px] h-[500px] rounded-full blur-[150px]"
+          style={{ backgroundColor: "rgba(217, 217, 255, 0.45)" }}
         />
         <motion.div
           animate={{
             scale: [1, 1.15, 1],
-            opacity: [0.1, 0.25, 0.1],
+            opacity: [0.2, 0.35, 0.2],
           }}
           transition={{
             duration: 10,
@@ -54,7 +55,8 @@ export function ContactHero() {
             ease: "easeInOut",
             delay: 2,
           }}
-          className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-pc-green/15 blur-[120px]"
+          className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full blur-[120px]"
+          style={{ backgroundColor: "rgba(176, 176, 255, 0.35)" }}
         />
       </div>
 
@@ -71,20 +73,20 @@ export function ContactHero() {
             >
               <span
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono"
-                style={{ backgroundColor: "rgba(198, 218, 131, 0.2)", color: "#0F1455" }}
+                style={{ backgroundColor: "rgba(217, 217, 255, 0.4)", color: "#2d2d5a" }}
               >
-                <span className="w-2 h-2 rounded-full bg-[#C6DA83] animate-pulse" />
+                <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#9b9bff" }} />
                 status: {contactInfo.status}
               </span>
               <span
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono"
-                style={{ backgroundColor: "rgba(254, 194, 230, 0.2)", color: "#0F1455" }}
+                style={{ backgroundColor: "rgba(176, 176, 255, 0.35)", color: "#2d2d5a" }}
               >
                 avg response: &lt; 24h
               </span>
               <span
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono"
-                style={{ backgroundColor: "rgba(74, 79, 135, 0.15)", color: "#0F1455" }}
+                style={{ backgroundColor: "rgba(155, 155, 255, 0.25)", color: "#2d2d5a" }}
               >
                 build: {contactInfo.build}
               </span>
@@ -95,10 +97,11 @@ export function ContactHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-pc-navy mb-6"
+              className="text-4xl sm:text-5xl lg:text-6xl font-hero font-semibold tracking-tight mb-6"
+              style={{ color: "#2d2d5a" }}
             >
               Contact{" "}
-              <span style={{ color: "#FEC2E6" }}>PeaceCode</span>
+              <span style={{ color: "#9b9bff" }}>PeaceCode</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -106,7 +109,8 @@ export function ContactHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg sm:text-xl text-pc-slate max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed"
+              className="text-lg sm:text-xl max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed"
+              style={{ color: "#5c5c8a" }}
             >
               Have a question, feedback, or just want to say hi? We're here to help—
               reach out and let's make mental wellness more accessible together.
@@ -123,7 +127,7 @@ export function ContactHero() {
                 size="lg"
                 onClick={scrollToForm}
                 className="px-8 py-6 text-base font-semibold rounded-full"
-                style={{ backgroundColor: "#FEC2E6", color: "#0F1455" }}
+                style={{ backgroundColor: "#9b9bff", color: "#fff" }}
               >
                 <Sparkles className="w-4 h-4 mr-2" />
                 Send Message
@@ -132,7 +136,8 @@ export function ContactHero() {
                 size="lg"
                 variant="outline"
                 asChild
-                className="px-8 py-6 text-base font-semibold rounded-full border-pc-navy/20 text-pc-navy hover:bg-pc-navy/5"
+                className="px-8 py-6 text-base font-semibold rounded-full hover:bg-[#d9d9ff]/20"
+              style={{ borderColor: "rgba(155, 155, 255, 0.5)", color: "#2d2d5a" }}
               >
                 <a href={`mailto:${contactInfo.emails.support}`}>
                   <Mail className="w-4 h-4 mr-2" />
@@ -155,7 +160,7 @@ export function ContactHero() {
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <ArrowDown className="w-5 h-5 text-pc-slate/40" />
+        <ArrowDown className="w-5 h-5" style={{ color: "rgba(92, 92, 138, 0.5)" }} />
       </motion.div>
     </section>
   )

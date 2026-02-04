@@ -26,10 +26,10 @@ export function RoleBentoCard({ role, index }: RoleBentoCardProps) {
       <Card
         className={cn(
           "group relative overflow-hidden cursor-pointer",
-          "bg-white/80 backdrop-blur-sm border-pc-pink/20",
-          "hover:border-pc-pink/50 hover:shadow-2xl hover:shadow-pc-pink/15",
+          "bg-white/80 backdrop-blur-sm",
+          "hover:border-[#d9d9ff]/60 hover:shadow-2xl hover:shadow-[#d9d9ff]/20",
           "transition-all duration-500 ease-out",
-          isExpanded && "border-pc-pink/50 shadow-xl shadow-pc-pink/10"
+          isExpanded && "border-[#d9d9ff]/60 shadow-xl shadow-[#d9d9ff]/15"
         )}
         onClick={() => setIsExpanded(!isExpanded)}
         onMouseEnter={() => {
@@ -60,30 +60,31 @@ export function RoleBentoCard({ role, index }: RoleBentoCardProps) {
               "p-4 rounded-2xl bg-gradient-to-br shadow-lg",
               role.color
             )}>
-              <Icon className="w-8 h-8 text-pc-navy" />
+              <Icon className="w-8 h-8" style={{ color: "#2d2d5a" }} />
             </div>
             <motion.div
               animate={{ rotate: isExpanded ? 180 : 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden p-2 rounded-full bg-pc-pink/10"
+              className="lg:hidden p-2 rounded-full"
+              style={{ backgroundColor: "rgba(217, 217, 255, 0.3)" }}
             >
-              <ChevronDown className="w-5 h-5 text-pc-slate" />
+              <ChevronDown className="w-5 h-5" style={{ color: "#5c5c8a" }} />
             </motion.div>
           </div>
 
           {/* Title & Subtitle */}
-          <h3 className="text-2xl font-bold text-pc-navy mb-2 transition-colors">
+          <h3 className="text-2xl font-bold mb-2 transition-colors" style={{ color: "#2d2d5a" }}>
             {role.title}
           </h3>
-          <p className="text-pc-slate mb-6">
+          <p className="mb-6" style={{ color: "#5c5c8a" }}>
             {role.subtitle}
           </p>
 
           {/* Quick Bullets */}
           <ul className="space-y-3 mb-6">
             {role.bullets.map((bullet, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm text-pc-slate">
-                <Check className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: '#FEC2E6' }} />
+              <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "#5c5c8a" }}>
+                <Check className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "#9b9bff" }} />
                 <span>{bullet}</span>
               </li>
             ))}
@@ -99,11 +100,11 @@ export function RoleBentoCard({ role, index }: RoleBentoCardProps) {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="overflow-hidden"
               >
-                <div className="pt-6 border-t border-pc-pink/20 space-y-6">
+                <div className="pt-6 border-t space-y-6" style={{ borderColor: "rgba(217, 217, 255, 0.5)" }}>
                   {/* Sub-roles if any */}
                   {role.subRoles && (
                     <div>
-                      <h4 className="font-semibold text-sm text-pc-navy mb-3">
+                      <h4 className="font-semibold text-sm mb-3" style={{ color: "#2d2d5a" }}>
                         Available Tracks
                       </h4>
                       <div className="flex flex-wrap gap-2">
@@ -112,8 +113,8 @@ export function RoleBentoCard({ role, index }: RoleBentoCardProps) {
                             key={i}
                             className="px-3 py-1 text-sm rounded-full font-medium"
                             style={{
-                              backgroundColor: 'rgba(254, 194, 230, 0.2)',
-                              color: '#0F1455',
+                              backgroundColor: "rgba(217, 217, 255, 0.4)",
+                              color: "#2d2d5a",
                             }}
                           >
                             {sub.title}
@@ -125,13 +126,13 @@ export function RoleBentoCard({ role, index }: RoleBentoCardProps) {
 
                   {/* Responsibilities */}
                   <div>
-                    <h4 className="font-semibold text-sm text-pc-navy mb-3">
+                    <h4 className="font-semibold text-sm mb-3" style={{ color: "#2d2d5a" }}>
                       What You'll Do
                     </h4>
                     <ul className="space-y-2">
                       {role.expandedContent.responsibilities.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-pc-slate">
-                          <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#FEC2E6' }} />
+                        <li key={i} className="flex items-start gap-2 text-sm" style={{ color: "#5c5c8a" }}>
+                          <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: "#9b9bff" }} />
                           {item}
                         </li>
                       ))}
@@ -141,12 +142,12 @@ export function RoleBentoCard({ role, index }: RoleBentoCardProps) {
                   {/* Stack if any */}
                   {role.expandedContent.stack && (
                     <div>
-                      <h4 className="font-semibold text-sm text-pc-navy mb-3">
+                      <h4 className="font-semibold text-sm mb-3" style={{ color: "#2d2d5a" }}>
                         Tech Stack
                       </h4>
                       <div className="space-y-1">
                         {role.expandedContent.stack.map((item, i) => (
-                          <p key={i} className="text-sm text-pc-slate">
+                          <p key={i} className="text-sm" style={{ color: "#5c5c8a" }}>
                             {item}
                           </p>
                         ))}
@@ -156,13 +157,13 @@ export function RoleBentoCard({ role, index }: RoleBentoCardProps) {
 
                   {/* Expectations */}
                   <div>
-                    <h4 className="font-semibold text-sm text-pc-navy mb-3">
+                    <h4 className="font-semibold text-sm mb-3" style={{ color: "#2d2d5a" }}>
                       What We're Looking For
                     </h4>
                     <ul className="space-y-2">
                       {role.expandedContent.expectations.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-pc-slate">
-                          <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#C6DA83' }} />
+                        <li key={i} className="flex items-start gap-2 text-sm" style={{ color: "#5c5c8a" }}>
+                          <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: "#7b7bff" }} />
                           {item}
                         </li>
                       ))}
@@ -174,8 +175,8 @@ export function RoleBentoCard({ role, index }: RoleBentoCardProps) {
                     <span 
                       className="px-3 py-1 text-xs rounded-full font-medium"
                       style={{
-                        backgroundColor: 'rgba(198, 218, 131, 0.2)',
-                        color: '#0F1455',
+                        backgroundColor: "rgba(176, 176, 255, 0.4)",
+                        color: "#2d2d5a",
                       }}
                     >
                       ⏱️ {role.expandedContent.timeCommitment}
@@ -188,7 +189,7 @@ export function RoleBentoCard({ role, index }: RoleBentoCardProps) {
 
           {/* Expand hint on desktop */}
           <div className="hidden lg:block">
-            <p className="text-xs text-pc-slate/50 mt-4 group-hover:opacity-0 transition-opacity">
+            <p className="text-xs mt-4 group-hover:opacity-0 transition-opacity" style={{ color: "rgba(92, 92, 138, 0.6)" }}>
               Hover to see more →
             </p>
           </div>

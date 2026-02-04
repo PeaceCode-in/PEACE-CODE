@@ -41,21 +41,21 @@ export function OpenRolesBento() {
           <div 
             className="inline-flex flex-wrap items-center justify-center gap-4 p-6 rounded-2xl border"
             style={{
-              backgroundColor: 'rgba(254, 194, 230, 0.1)',
-              borderColor: 'rgba(254, 194, 230, 0.3)',
+              backgroundColor: "rgba(217, 217, 255, 0.3)",
+              borderColor: "rgba(155, 155, 255, 0.5)",
             }}
           >
-            <HelpCircle className="w-6 h-6 text-pc-slate" />
+            <HelpCircle className="w-6 h-6" style={{ color: "#5c5c8a" }} />
             <div className="text-left">
-              <p className="font-medium text-pc-navy">Not sure which role fits?</p>
-              <p className="text-sm text-pc-slate">
+              <p className="font-medium" style={{ color: "#2d2d5a" }}>Not sure which role fits?</p>
+              <p className="text-sm" style={{ color: "#5c5c8a" }}>
                 Apply anyway—we'll find the right spot for you.
               </p>
             </div>
             <Button 
               onClick={scrollToForm} 
               className="rounded-full px-6"
-              style={{ backgroundColor: '#FEC2E6', color: '#0F1455' }}
+              style={{ backgroundColor: "#9b9bff", color: "#fff" }}
             >
               Apply Anyway
               <ArrowDown className="ml-2 w-4 h-4" />

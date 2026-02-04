@@ -18,10 +18,10 @@ export function RelatedLinks() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-pc-navy mb-3">
+          <h2 className="text-2xl sm:text-3xl font-bold font-hero mb-3" style={{ color: "#2d2d5a" }}>
             Related Resources
           </h2>
-          <p className="text-pc-slate">Explore more ways we can help</p>
+          <p style={{ color: "#5c5c8a" }}>Explore more ways we can help</p>
         </motion.div>
 
         {/* Bento cards */}
@@ -35,14 +35,14 @@ export function RelatedLinks() {
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
               <Link href={link.href}>
-                <Card className="group p-6 h-full bg-pc-offwhite/50 border-pc-pink/10 hover:border-pc-pink/30 hover:shadow-lg hover:shadow-pc-pink/10 hover:-translate-y-1 transition-all duration-300">
+                <Card className="group p-6 h-full bg-white/70 hover:shadow-lg hover:-translate-y-1 transition-all duration-300" style={{ borderColor: "rgba(217, 217, 255, 0.5)", backgroundColor: "rgba(251, 250, 255, 0.8)" }}>
                   <div
                     className="p-3 rounded-xl w-fit mb-4"
                     style={{ backgroundColor: `${link.color}20` }}
                   >
                     <link.icon className="w-6 h-6" style={{ color: link.color }} />
                   </div>
-                  <h3 className="font-semibold text-pc-navy mb-1 group-hover:text-pc-pink transition-colors">
+                  <h3 className="font-semibold mb-1 transition-colors group-hover:opacity-80" style={{ color: "#2d2d5a" }}>
                     {link.title}
                   </h3>
                   <p className="text-sm text-pc-slate mb-3">{link.description}</p>
@@ -68,7 +68,8 @@ export function RelatedLinks() {
             <Link
               key={link.label}
               href={link.href}
-              className="px-4 py-2 rounded-full text-sm font-medium bg-pc-pink/10 text-pc-navy hover:bg-pc-pink/20 border border-pc-pink/20 transition-all"
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all"
+              style={{ backgroundColor: "rgba(217, 217, 255, 0.4)", color: "#2d2d5a", border: "1px solid rgba(155, 155, 255, 0.5)" }}
             >
               {link.label}
             </Link>
@@ -81,7 +82,7 @@ export function RelatedLinks() {
 
 export function FooterStrip() {
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-pc-offwhite border-t border-pc-pink/10">
+    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-[#fbfaff] border-t" style={{ borderColor: "rgba(217, 217, 255, 0.5)" }}>
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -93,7 +94,7 @@ export function FooterStrip() {
           <div className="flex items-center gap-2 text-pc-slate">
             <span
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono"
-              style={{ backgroundColor: "rgba(198, 218, 131, 0.2)", color: "#0F1455" }}
+              style={{ backgroundColor: "rgba(217, 217, 255, 0.4)", color: "#2d2d5a" }}
             >
               <span className="w-2 h-2 rounded-full bg-[#C6DA83] animate-pulse" />
               {contactInfo.responseTime}

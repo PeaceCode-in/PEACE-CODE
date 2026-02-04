@@ -126,10 +126,10 @@ export function ContactForm() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-pc-navy mb-3">
+          <h2 className="text-2xl sm:text-3xl font-bold font-hero mb-3" style={{ color: "#2d2d5a" }}>
             Send Us a Message
           </h2>
-          <p className="text-pc-slate">
+          <p style={{ color: "#5c5c8a" }}>
             Fill out the form below and we'll get back to you soon
           </p>
         </motion.div>
@@ -142,38 +142,38 @@ export function ContactForm() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
             >
-              <Card className="bg-white/90 backdrop-blur-sm border-pc-green/30 shadow-xl">
+              <Card className="bg-white/90 backdrop-blur-sm shadow-xl" style={{ borderColor: "rgba(217, 217, 255, 0.5)" }}>
                 <CardContent className="p-8 sm:p-12 text-center">
                   <div
                     className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6"
-                    style={{ backgroundColor: "rgba(198, 218, 131, 0.2)" }}
+                    style={{ backgroundColor: "rgba(155, 155, 255, 0.3)" }}
                   >
-                    <CheckCircle2 className="w-10 h-10" style={{ color: "#C6DA83" }} />
+                    <CheckCircle2 className="w-10 h-10" style={{ color: "#9b9bff" }} />
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-pc-navy mb-2">
+                  <h3 className="text-2xl font-bold font-hero mb-2" style={{ color: "#2d2d5a" }}>
                     Message Sent!
                   </h3>
-                  <p className="text-pc-slate mb-6">
+                  <p className="mb-6" style={{ color: "#5c5c8a" }}>
                     We've received your message and will respond within 24-48 hours.
                   </p>
 
                   {/* Ticket ID */}
                   <div
                     className="inline-flex items-center gap-3 px-5 py-3 rounded-xl font-mono text-sm mb-6"
-                    style={{ backgroundColor: "rgba(254, 194, 230, 0.15)" }}
+                    style={{ backgroundColor: "rgba(217, 217, 255, 0.25)" }}
                   >
-                    <span className="text-pc-slate">Ticket created:</span>
-                    <span className="font-bold text-pc-navy">{ticketId}</span>
+                    <span style={{ color: "#5c5c8a" }}>Ticket created:</span>
+                    <span className="font-bold" style={{ color: "#2d2d5a" }}>{ticketId}</span>
                     <button
                       onClick={copyTicketId}
                       className="p-1.5 rounded-md hover:bg-white/50 transition-colors"
                     >
-                      <Copy className="w-4 h-4 text-pc-slate" />
+                      <Copy className="w-4 h-4" style={{ color: "#5c5c8a" }} />
                     </button>
                   </div>
 
-                  <p className="text-sm text-pc-slate/70">
+                  <p className="text-sm" style={{ color: "rgba(92, 92, 138, 0.8)" }}>
                     This form will reset in a few seconds, or you can{" "}
                     <button
                       onClick={() => {
@@ -182,7 +182,8 @@ export function ContactForm() {
                         setIsSuccess(false)
                         setTicketId("")
                       }}
-                      className="text-pc-navy underline hover:no-underline"
+                      className="underline hover:no-underline"
+                      style={{ color: "#2d2d5a" }}
                     >
                       send another message
                     </button>
@@ -197,7 +198,7 @@ export function ContactForm() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <Card className="bg-white/90 backdrop-blur-sm border-pc-pink/20 shadow-xl shadow-pc-pink/5">
+              <Card className="bg-white/90 backdrop-blur-sm shadow-xl" style={{ borderColor: "rgba(217, 217, 255, 0.5)", boxShadow: "0 25px 50px -12px rgba(155, 155, 255, 0.15)" }}>
                 <CardContent className="p-6 sm:p-8 lg:p-10">
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -208,7 +209,7 @@ export function ContactForm() {
                           name="fullName"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-pc-navy">Full Name *</FormLabel>
+                              <FormLabel style={{ color: "#2d2d5a" }}>Full Name *</FormLabel>
                               <FormControl>
                                 <Input placeholder="Your name" {...field} />
                               </FormControl>
@@ -222,7 +223,7 @@ export function ContactForm() {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-pc-navy">Email *</FormLabel>
+                              <FormLabel style={{ color: "#2d2d5a" }}>Email *</FormLabel>
                               <FormControl>
                                 <Input type="email" placeholder="you@example.com" {...field} />
                               </FormControl>
@@ -238,7 +239,7 @@ export function ContactForm() {
                         name="topic"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-pc-navy">Topic *</FormLabel>
+                            <FormLabel style={{ color: "#2d2d5a" }}>Topic *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
                                 <SelectTrigger>
@@ -264,7 +265,7 @@ export function ContactForm() {
                         name="message"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-pc-navy">Message *</FormLabel>
+                            <FormLabel style={{ color: "#2d2d5a" }}>Message *</FormLabel>
                             <FormControl>
                               <Textarea
                                 placeholder="Tell us how we can help..."
@@ -272,7 +273,7 @@ export function ContactForm() {
                                 {...field}
                               />
                             </FormControl>
-                            <div className="flex justify-between text-xs text-pc-slate">
+                            <div className="flex justify-between text-xs" style={{ color: "#5c5c8a" }}>
                               <FormMessage />
                               <span>{field.value?.length || 0}/5000</span>
                             </div>
@@ -286,8 +287,8 @@ export function ContactForm() {
                         name="attachment"
                         render={() => (
                           <FormItem>
-                            <FormLabel className="text-pc-navy">
-                              Attachment <span className="text-pc-slate/70">(optional)</span>
+                            <FormLabel style={{ color: "#2d2d5a" }}>
+                              Attachment <span style={{ color: "rgba(92, 92, 138, 0.8)" }}>(optional)</span>
                             </FormLabel>
                             <FormControl>
                               <div>
@@ -305,20 +306,20 @@ export function ContactForm() {
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     className="flex items-center justify-between p-4 rounded-lg"
-                                    style={{ backgroundColor: "rgba(254, 194, 230, 0.1)" }}
+                                    style={{ backgroundColor: "rgba(217, 217, 255, 0.2)" }}
                                   >
                                     <div className="flex items-center gap-3">
                                       <div
                                         className="p-2 rounded-lg"
-                                        style={{ backgroundColor: "rgba(254, 194, 230, 0.2)" }}
+                                        style={{ backgroundColor: "rgba(217, 217, 255, 0.3)" }}
                                       >
-                                        <FileText className="w-5 h-5" style={{ color: "#FEC2E6" }} />
+                                        <FileText className="w-5 h-5" style={{ color: "#9b9bff" }} />
                                       </div>
                                       <div>
-                                        <p className="font-medium text-sm text-pc-navy">
+                                        <p className="font-medium text-sm" style={{ color: "#2d2d5a" }}>
                                           {selectedFile.name}
                                         </p>
-                                        <p className="text-xs text-pc-slate">
+                                        <p className="text-xs" style={{ color: "#5c5c8a" }}>
                                           {formatFileSize(selectedFile.size)}
                                         </p>
                                       </div>
@@ -338,15 +339,15 @@ export function ContactForm() {
                                     htmlFor="attachment-upload"
                                     className={cn(
                                       "flex flex-col items-center justify-center p-6 rounded-lg border-2 border-dashed",
-                                      "border-pc-pink/20 hover:border-pc-pink/40 hover:bg-pc-pink/5",
+                                      "border-[#d9d9ff]/50 hover:border-[#9b9bff]/60 hover:bg-[#d9d9ff]/10",
                                       "cursor-pointer transition-all duration-200"
                                     )}
                                   >
-                                    <Upload className="w-6 h-6 text-pc-slate mb-2" />
-                                    <p className="font-medium text-sm text-pc-navy">
+                                    <Upload className="w-6 h-6 mb-2" style={{ color: "#5c5c8a" }} />
+                                    <p className="font-medium text-sm" style={{ color: "#2d2d5a" }}>
                                       Click to upload
                                     </p>
-                                    <p className="text-xs text-pc-slate mt-1">
+                                    <p className="text-xs mt-1" style={{ color: "#5c5c8a" }}>
                                       Images or PDF, max 5MB
                                     </p>
                                   </label>
@@ -371,7 +372,7 @@ export function ContactForm() {
                               />
                             </FormControl>
                             <div className="space-y-1 leading-none">
-                              <FormLabel className="text-sm font-normal text-pc-slate">
+                              <FormLabel className="text-sm font-normal" style={{ color: "#5c5c8a" }}>
                                 I agree to be contacted back regarding my inquiry *
                               </FormLabel>
                               <FormMessage />
@@ -386,7 +387,7 @@ export function ContactForm() {
                         size="lg"
                         disabled={isSubmitting}
                         className="w-full rounded-full"
-                        style={{ backgroundColor: "#FEC2E6", color: "#0F1455" }}
+                        style={{ backgroundColor: "#9b9bff", color: "#fff" }}
                       >
                         {isSubmitting ? (
                           <>

@@ -283,14 +283,14 @@ const faqList: QA[] = [
   },
 ]
 
-// Category configuration with icons and colors
+// Category configuration with icons and colors - lavender palette
 const categoryConfig: Record<string, { icon: typeof HelpCircle; color: string; bgColor: string }> = {
-  General: { icon: HelpCircle, color: "#FEC2E6", bgColor: "rgba(254, 194, 230, 0.15)" },
-  Therapy: { icon: Heart, color: "#C6DA83", bgColor: "rgba(198, 218, 131, 0.15)" },
-  Assessments: { icon: ClipboardCheck, color: "#4A4F87", bgColor: "rgba(74, 79, 135, 0.15)" },
-  Technical: { icon: Laptop, color: "#FEC2E6", bgColor: "rgba(254, 194, 230, 0.15)" },
-  Payments: { icon: CreditCard, color: "#C6DA83", bgColor: "rgba(198, 218, 131, 0.15)" },
-  Privacy: { icon: Shield, color: "#4A4F87", bgColor: "rgba(74, 79, 135, 0.15)" },
+  General: { icon: HelpCircle, color: "#9b9bff", bgColor: "rgba(217, 217, 255, 0.3)" },
+  Therapy: { icon: Heart, color: "#7b7bff", bgColor: "rgba(176, 176, 255, 0.25)" },
+  Assessments: { icon: ClipboardCheck, color: "#9b9bff", bgColor: "rgba(155, 155, 255, 0.25)" },
+  Technical: { icon: Laptop, color: "#b0b0ff", bgColor: "rgba(217, 217, 255, 0.25)" },
+  Payments: { icon: CreditCard, color: "#7b7bff", bgColor: "rgba(176, 176, 255, 0.25)" },
+  Privacy: { icon: Shield, color: "#9b9bff", bgColor: "rgba(155, 155, 255, 0.25)" },
 }
 
 // Get unique categories
@@ -310,10 +310,10 @@ function FAQItem({ faq, index }: { faq: QA; index: number }) {
       <div
         className={cn(
           "group rounded-2xl border transition-all duration-300 overflow-hidden",
-          "bg-white/80 backdrop-blur-sm",
+          "bg-white/80 backdrop-blur-sm border-[#d9d9ff]/40",
           isOpen
-            ? "border-pc-pink/40 shadow-lg shadow-pc-pink/10"
-            : "border-pc-pink/10 hover:border-pc-pink/30 hover:shadow-md"
+            ? "shadow-lg"
+            : "hover:shadow-md"
         )}
       >
         <button
@@ -327,7 +327,7 @@ function FAQItem({ faq, index }: { faq: QA; index: number }) {
             <config.icon className="w-5 h-5" style={{ color: config.color }} />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-pc-navy pr-8 leading-relaxed">
+            <h3 className="font-semibold pr-8 leading-relaxed" style={{ color: "#2d2d5a" }}>
               {faq.q}
             </h3>
           </div>
@@ -336,7 +336,7 @@ function FAQItem({ faq, index }: { faq: QA; index: number }) {
             transition={{ duration: 0.2 }}
             className="flex-shrink-0 mt-1"
           >
-            <ChevronDown className="w-5 h-5 text-pc-slate" />
+            <ChevronDown className="w-5 h-5" style={{ color: "#5c5c8a" }} />
           </motion.div>
         </button>
 
@@ -393,7 +393,7 @@ export default function FAQPage() {
   }, [filteredFAQs])
 
   return (
-    <main className="flex flex-col min-h-screen bg-pc-offwhite">
+    <main className="flex flex-col min-h-screen bg-[#fbfaff]">
       <Header />
 
       {/* Hero Section */}
@@ -410,7 +410,8 @@ export default function FAQPage() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-0 right-1/4 w-[600px] h-[600px] rounded-full bg-pc-pink/20 blur-[150px]"
+            className="absolute top-0 right-1/4 w-[600px] h-[600px] rounded-full blur-[150px]"
+            style={{ backgroundColor: "rgba(217, 217, 255, 0.4)" }}
           />
           <motion.div
             animate={{
@@ -432,9 +433,10 @@ export default function FAQPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-pc-pink/20 border border-pc-pink/30 text-pc-navy text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium mb-6"
+            style={{ backgroundColor: "rgba(217, 217, 255, 0.4)", border: "1px solid rgba(155, 155, 255, 0.5)", color: "#2d2d5a" }}
           >
-            <Sparkles className="w-4 h-4" style={{ color: "#FEC2E6" }} />
+            <Sparkles className="w-4 h-4" style={{ color: "#9b9bff" }} />
             <span>We're here to help</span>
           </motion.div>
 
@@ -442,17 +444,19 @@ export default function FAQPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-pc-navy mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-hero font-semibold tracking-tight mb-6"
+            style={{ color: "#2d2d5a" }}
           >
             Frequently Asked{" "}
-            <span style={{ color: "#FEC2E6" }}>Questions</span>
+            <span style={{ color: "#9b9bff" }}>Questions</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-pc-slate max-w-2xl mx-auto mb-10"
+            className="text-xl max-w-2xl mx-auto mb-10"
+            style={{ color: "#5c5c8a" }}
           >
             Find answers to common questions about our platform, therapy services, 
             payments, privacy, and more.
@@ -465,13 +469,14 @@ export default function FAQPage() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="max-w-xl mx-auto relative"
           >
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-pc-slate" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: "#5c5c8a" }} />
             <Input
               type="text"
               placeholder="Search for answers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 pr-4 py-6 text-base rounded-full bg-white/80 border-pc-pink/20 focus:border-pc-pink/50 focus:ring-pc-pink/20"
+              className="pl-12 pr-4 py-6 text-base rounded-full bg-white/80 focus:border-[#9b9bff]/60 focus:ring-[#d9d9ff]/30"
+              style={{ borderColor: "rgba(217, 217, 255, 0.6)" }}
             />
           </motion.div>
         </div>
@@ -491,13 +496,13 @@ export default function FAQPage() {
               className={cn(
                 "px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
                 !activeCategory
-                  ? "text-pc-navy shadow-md"
-                  : "bg-white/60 text-pc-slate hover:bg-white/80 border border-pc-pink/10"
+                  ? "shadow-md"
+                  : "bg-white/60 hover:bg-white/80 border"
               )}
               style={
                 !activeCategory
-                  ? { backgroundColor: "#FEC2E6" }
-                  : undefined
+                  ? { backgroundColor: "#9b9bff", color: "#fff" }
+                  : { color: "#5c5c8a", borderColor: "rgba(217, 217, 255, 0.5)" }
               }
             >
               All Topics
@@ -512,13 +517,13 @@ export default function FAQPage() {
                   className={cn(
                     "flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
                     isActive
-                      ? "text-pc-navy shadow-md"
-                      : "bg-white/60 text-pc-slate hover:bg-white/80 border border-pc-pink/10"
+                      ? "shadow-md"
+                      : "bg-white/60 hover:bg-white/80 border"
                   )}
                   style={
                     isActive
-                      ? { backgroundColor: config.color }
-                      : undefined
+                      ? { backgroundColor: config.color, color: "#fff" }
+                      : { color: "#5c5c8a", borderColor: "rgba(217, 217, 255, 0.5)" }
                   }
                 >
                   <config.icon className="w-4 h-4" />
@@ -541,14 +546,14 @@ export default function FAQPage() {
             >
               <div
                 className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4"
-                style={{ backgroundColor: "rgba(254, 194, 230, 0.2)" }}
+                style={{ backgroundColor: "rgba(217, 217, 255, 0.4)" }}
               >
-                <Search className="w-8 h-8" style={{ color: "#FEC2E6" }} />
+                <Search className="w-8 h-8" style={{ color: "#9b9bff" }} />
               </div>
-              <h3 className="text-xl font-semibold text-pc-navy mb-2">
+              <h3 className="text-xl font-semibold mb-2 font-hero" style={{ color: "#2d2d5a" }}>
                 No results found
               </h3>
-              <p className="text-pc-slate">
+              <p style={{ color: "#5c5c8a" }}>
                 Try adjusting your search or browse all categories.
               </p>
             </motion.div>
@@ -579,7 +584,7 @@ export default function FAQPage() {
                       >
                         <config.icon className="w-6 h-6" style={{ color: config.color }} />
                       </div>
-                      <h2 className="text-2xl font-bold text-pc-navy">{category}</h2>
+                      <h2 className="text-2xl font-bold font-hero" style={{ color: "#2d2d5a" }}>{category}</h2>
                       <span
                         className="px-3 py-1 rounded-full text-xs font-medium"
                         style={{ backgroundColor: config.bgColor, color: config.color }}
@@ -630,7 +635,7 @@ export default function FAQPage() {
               >
                 <MessageCircle className="w-8 h-8" style={{ color: "#FEC2E6" }} />
               </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+              <h3 className="text-2xl sm:text-3xl font-bold font-hero text-white mb-4">
                 Still have questions?
               </h3>
               <p className="text-white/70 max-w-lg mx-auto mb-8">
@@ -641,7 +646,7 @@ export default function FAQPage() {
                 <a
                   href="mailto:support@peacecode.in"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all hover:scale-105"
-                  style={{ backgroundColor: "#FEC2E6", color: "#0F1455" }}
+                  style={{ backgroundColor: "#d9d9ff", color: "#2d2d5a" }}
                 >
                   Contact Support
                 </a>

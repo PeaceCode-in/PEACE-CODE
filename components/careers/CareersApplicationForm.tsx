@@ -127,7 +127,7 @@ export function CareersApplicationForm() {
   }
 
   return (
-    <section id="application-form" className="py-24 px-4 sm:px-6 lg:px-8 bg-pc-offwhite">
+    <section id="application-form" className="py-24 px-4 sm:px-6 lg:px-8 bg-[#fbfaff]">
       <div className="container mx-auto max-w-4xl">
         <SectionHeading
           title="Apply to Join Us"
@@ -143,13 +143,13 @@ export function CareersApplicationForm() {
               exit={{ opacity: 0, scale: 0.95 }}
               className="text-center py-16"
             >
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6" style={{ backgroundColor: 'rgba(198, 218, 131, 0.2)' }}>
-                <CheckCircle2 className="w-10 h-10" style={{ color: '#C6DA83' }} />
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6" style={{ backgroundColor: "rgba(155, 155, 255, 0.3)" }}>
+                <CheckCircle2 className="w-10 h-10" style={{ color: "#9b9bff" }} />
               </div>
-              <h3 className="text-2xl font-bold text-pc-navy mb-2">
+              <h3 className="text-2xl font-bold font-hero mb-2" style={{ color: "#2d2d5a" }}>
                 Application Received!
               </h3>
-              <p className="text-pc-slate max-w-md mx-auto">
+              <p className="max-w-md mx-auto" style={{ color: "#5c5c8a" }}>
                 Thank you for your interest in PeaceCode. We'll review your application and 
                 get back to you within a week.
               </p>
@@ -161,13 +161,13 @@ export function CareersApplicationForm() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <Card className="bg-white/90 backdrop-blur-sm border-pc-pink/20 shadow-xl shadow-pc-pink/5">
+              <Card className="bg-white/90 backdrop-blur-sm shadow-xl" style={{ borderColor: "rgba(217, 217, 255, 0.5)", boxShadow: "0 25px 50px -12px rgba(155, 155, 255, 0.15)" }}>
                 <CardContent className="p-6 sm:p-8 lg:p-10">
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                       {/* Personal Information */}
                       <div className="space-y-6">
-                        <h3 className="text-lg font-semibold text-pc-navy border-b border-pc-pink/20 pb-2">
+                        <h3 className="text-lg font-semibold border-b pb-2" style={{ color: "#2d2d5a", borderColor: "rgba(217, 217, 255, 0.5)" }}>
                           Personal Information
                         </h3>
                         
@@ -250,7 +250,7 @@ export function CareersApplicationForm() {
 
                       {/* Role Selection */}
                       <div className="space-y-6">
-                        <h3 className="text-lg font-semibold text-pc-navy border-b border-pc-pink/20 pb-2">
+                        <h3 className="text-lg font-semibold border-b pb-2" style={{ color: "#2d2d5a", borderColor: "rgba(217, 217, 255, 0.5)" }}>
                           Role Interest
                         </h3>
 
@@ -356,7 +356,7 @@ export function CareersApplicationForm() {
 
                       {/* Portfolio Links */}
                       <div className="space-y-6">
-                        <h3 className="text-lg font-semibold text-pc-navy border-b border-pc-pink/20 pb-2">
+                        <h3 className="text-lg font-semibold border-b pb-2" style={{ color: "#2d2d5a", borderColor: "rgba(217, 217, 255, 0.5)" }}>
                           Portfolio Links (Optional)
                         </h3>
 
@@ -422,7 +422,7 @@ export function CareersApplicationForm() {
 
                       {/* Why PeaceCode */}
                       <div className="space-y-6">
-                        <h3 className="text-lg font-semibold text-pc-navy border-b border-pc-pink/20 pb-2">
+                        <h3 className="text-lg font-semibold border-b pb-2" style={{ color: "#2d2d5a", borderColor: "rgba(217, 217, 255, 0.5)" }}>
                           Tell Us About Yourself
                         </h3>
 
@@ -450,7 +450,7 @@ export function CareersApplicationForm() {
 
                       {/* Resume Upload */}
                       <div className="space-y-6">
-                        <h3 className="text-lg font-semibold text-pc-navy border-b border-pc-pink/20 pb-2">
+                        <h3 className="text-lg font-semibold border-b pb-2" style={{ color: "#2d2d5a", borderColor: "rgba(217, 217, 255, 0.5)" }}>
                           Resume *
                         </h3>
 
@@ -556,7 +556,7 @@ export function CareersApplicationForm() {
                           size="lg"
                           disabled={isSubmitting}
                           className="flex-1 sm:flex-none rounded-full px-8"
-                          style={{ backgroundColor: '#FEC2E6', color: '#0F1455' }}
+                          style={{ backgroundColor: "#9b9bff", color: "#fff" }}
                         >
                           {isSubmitting ? (
                             <>
@@ -580,13 +580,13 @@ export function CareersApplicationForm() {
                 transition={{ delay: 0.5 }}
                 className="text-center mt-8"
               >
-                <p className="text-sm text-pc-slate flex items-center justify-center gap-2">
+                <p className="text-sm flex items-center justify-center gap-2" style={{ color: "#5c5c8a" }}>
                   <Mail className="w-4 h-4" />
                   Prefer email?{" "}
                   <a
                     href="mailto:careers@peacecode.in"
                     className="font-medium hover:underline"
-                    style={{ color: '#FEC2E6' }}
+                    style={{ color: "#9b9bff" }}
                   >
                     careers@peacecode.in
                   </a>

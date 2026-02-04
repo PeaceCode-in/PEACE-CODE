@@ -37,10 +37,10 @@ export function RelatedLinksSection({
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-pc-navy mb-3">
+          <h2 className="text-2xl sm:text-3xl font-bold font-hero mb-3" style={{ color: "#2d2d5a" }}>
             {title}
           </h2>
-          <p className="text-pc-slate">{subtitle}</p>
+          <p style={{ color: "#5c5c8a" }}>{subtitle}</p>
         </motion.div>
 
         {/* Bento cards */}
@@ -56,17 +56,17 @@ export function RelatedLinksSection({
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
                 <Link href={link.href}>
-                  <Card className="group p-6 h-full bg-pc-offwhite/50 border-pc-pink/10 hover:border-pc-pink/30 hover:shadow-lg hover:shadow-pc-pink/10 hover:-translate-y-1 transition-all duration-300">
+                  <Card className="group p-6 h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300" style={{ backgroundColor: "rgba(251, 250, 255, 0.9)", borderColor: "rgba(217, 217, 255, 0.5)" }}>
                     <div
                       className="p-3 rounded-xl w-fit mb-4"
                       style={{ backgroundColor: `${link.color}20` }}
                     >
                       <IconComponent className="w-6 h-6" style={{ color: link.color }} />
                     </div>
-                    <h3 className="font-semibold text-pc-navy mb-1 group-hover:text-pc-pink transition-colors">
+                    <h3 className="font-semibold mb-1 transition-colors group-hover:opacity-80" style={{ color: "#2d2d5a" }}>
                       {link.title}
                     </h3>
-                    <p className="text-sm text-pc-slate mb-3">{link.description}</p>
+                    <p className="text-sm mb-3" style={{ color: "#5c5c8a" }}>{link.description}</p>
                     <div
                       className="flex items-center text-sm font-medium"
                       style={{ color: link.color }}
@@ -93,7 +93,8 @@ export function RelatedLinksSection({
             <Link
               key={link.label}
               href={link.href}
-              className="px-4 py-2 rounded-full text-sm font-medium bg-pc-pink/10 text-pc-navy hover:bg-pc-pink/20 border border-pc-pink/20 transition-all"
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all hover:bg-[#d9d9ff]/30"
+              style={{ backgroundColor: "rgba(217, 217, 255, 0.4)", color: "#2d2d5a", border: "1px solid rgba(155, 155, 255, 0.5)" }}
             >
               {link.label}
             </Link>

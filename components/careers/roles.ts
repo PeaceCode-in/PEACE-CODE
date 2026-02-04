@@ -28,7 +28,7 @@ export const rolesData: RoleData[] = [
     title: "Product Engineering",
     subtitle: "Build the technology that powers student mental wellness",
     icon: Code,
-    color: "from-[#FEC2E6] to-[#E9A8CF]",
+    color: "from-[#d9d9ff] to-[#b0b0ff]",
     bullets: [
       "Ship features used by thousands of students",
       "Work with modern React, Next.js, and AI/ML",
@@ -77,7 +77,7 @@ export const rolesData: RoleData[] = [
     title: "Student Psych Team",
     subtitle: "Bridge psychology and technology for real impact",
     icon: Heart,
-    color: "from-[#C6DA83] to-[#A8C45F]",
+    color: "from-[#b0b0ff] to-[#9b9bff]",
     bullets: [
       "Create evidence-based mental health content",
       "Moderate peer support communities",
@@ -105,7 +105,7 @@ export const rolesData: RoleData[] = [
     title: "Campus Ambassador",
     subtitle: "Be the voice of PeaceCode at your university",
     icon: Megaphone,
-    color: "from-[#4A4F87] to-[#0F1455]",
+    color: "from-[#9b9bff] to-[#7b7bff]",
     bullets: [
       "Organize wellness events and workshops",
       "Build student communities on campus",

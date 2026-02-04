@@ -34,7 +34,7 @@ export const linkSets: Record<string, LinkSet> = {
         title: "Contact Us",
         description: "Questions about roles or process?",
         href: "/about/contact",
-        color: "#FEC2E6",
+        color: "#9b9bff",
       },
       {
         id: "help",
@@ -50,7 +50,7 @@ export const linkSets: Record<string, LinkSet> = {
         title: "About Us",
         description: "Learn about PeaceCode's mission",
         href: "/about/about-peace-code",
-        color: "#4A4F87",
+        color: "#9b9bff",
       },
     ],
     quickLinks: [
@@ -69,7 +69,7 @@ export const linkSets: Record<string, LinkSet> = {
         title: "Contact Us",
         description: "Can't find your answer? Reach out",
         href: "/about/contact",
-        color: "#FEC2E6",
+        color: "#9b9bff",
       },
       {
         id: "careers",
@@ -85,7 +85,7 @@ export const linkSets: Record<string, LinkSet> = {
         title: "Safety Resources",
         description: "Crisis support and helplines",
         href: "/resources",
-        color: "#4A4F87",
+        color: "#9b9bff",
       },
     ],
     quickLinks: [
@@ -104,7 +104,7 @@ export const linkSets: Record<string, LinkSet> = {
         title: "Help Center",
         description: "Find answers to common questions",
         href: "/about/faqs",
-        color: "#FEC2E6",
+        color: "#9b9bff",
       },
       {
         id: "careers",
@@ -120,7 +120,7 @@ export const linkSets: Record<string, LinkSet> = {
         title: "About Us",
         description: "Learn about PeaceCode's mission",
         href: "/about/about-peace-code",
-        color: "#4A4F87",
+        color: "#9b9bff",
       },
     ],
     quickLinks: [

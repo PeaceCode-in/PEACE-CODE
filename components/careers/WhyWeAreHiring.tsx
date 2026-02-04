@@ -23,7 +23,7 @@ export function WhyWeAreHiring() {
   }
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-pc-offwhite">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#fbfaff]">
       <div className="container mx-auto max-w-6xl">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left - Story */}
@@ -41,17 +41,17 @@ export function WhyWeAreHiring() {
             />
 
             <div className="prose prose-lg max-w-none">
-              <p className="text-pc-slate leading-relaxed">
+              <p className="leading-relaxed" style={{ color: "#5c5c8a" }}>
                 PeaceCode started with a simple observation: millions of Indian students 
                 struggle with mental health challenges, yet access to quality support remains 
                 fragmented and stigmatized.
               </p>
-              <p className="text-pc-slate leading-relaxed">
+              <p className="leading-relaxed" style={{ color: "#5c5c8a" }}>
                 We're building the platform we wished existed—AI-guided support, professional 
                 counseling, peer communities, and wellness tools, all designed with cultural 
                 sensitivity and in 10+ regional languages.
               </p>
-              <p className="text-pc-navy leading-relaxed font-medium">
+              <p className="leading-relaxed font-medium" style={{ color: "#2d2d5a" }}>
                 Now, we need exceptional people who care deeply about this mission to help 
                 us scale from thousands to millions of students.
               </p>
@@ -70,8 +70,8 @@ export function WhyWeAreHiring() {
                   key={index}
                   className="px-3 py-1 text-sm rounded-full font-medium"
                   style={{
-                    backgroundColor: index % 2 === 0 ? 'rgba(254, 194, 230, 0.3)' : 'rgba(198, 218, 131, 0.3)',
-                    color: '#0F1455',
+                    backgroundColor: index % 2 === 0 ? "rgba(217, 217, 255, 0.5)" : "rgba(176, 176, 255, 0.4)",
+                    color: "#2d2d5a",
                   }}
                 >
                   {badge.label}
@@ -90,17 +90,17 @@ export function WhyWeAreHiring() {
           >
             {highlights.map((item, index) => (
               <motion.div key={index} variants={itemVariants}>
-                <Card className="p-6 h-full bg-white/80 backdrop-blur-sm border-pc-pink/20 hover:border-pc-pink/40 hover:shadow-lg hover:shadow-pc-pink/10 transition-all duration-300 group">
+                <Card className="p-6 h-full bg-white/80 backdrop-blur-sm transition-all duration-300 group hover:border-[#d9d9ff]/70 hover:shadow-lg hover:shadow-[#d9d9ff]/15" style={{ borderColor: "rgba(217, 217, 255, 0.5)" }}>
                   <div 
                     className="p-3 rounded-xl w-fit mb-4 transition-colors"
-                    style={{ backgroundColor: 'rgba(254, 194, 230, 0.2)' }}
+                    style={{ backgroundColor: "rgba(217, 217, 255, 0.4)" }}
                   >
-                    <item.icon className="w-6 h-6" style={{ color: '#FEC2E6' }} />
+                    <item.icon className="w-6 h-6" style={{ color: "#9b9bff" }} />
                   </div>
-                  <h3 className="font-semibold text-pc-navy mb-2">
+                  <h3 className="font-semibold mb-2" style={{ color: "#2d2d5a" }}>
                     {item.title}
                   </h3>
-                  <p className="text-sm text-pc-slate leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: "#5c5c8a" }}>
                     {item.description}
                   </p>
                 </Card>
