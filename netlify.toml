@@ -1,14 +1,5 @@
-[build]
-  command = "npm run build"
-  publish = ".next"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
-[build.environment]
-  NODE_VERSION = "20"
-  NPM_FLAGS = "--legacy-peer-deps"
-
-[functions]
-  node_bundler = "esbuild"
-
+[[redirects]]
+  from = "/dashboard/*"
+  to = "https://YOUR_DASHBOARD_NETLIFY_URL.netlify.app/dashboard/:splat"
+  status = 200
+  force = true
