@@ -125,13 +125,13 @@ function HomePage() {
                 {t("home.hero.subtitle")}
               </p>
 
-              <div className="pt-4">
-                <Link href="/login">
-                  <MetalButton variant="lavender">
-                    Login
-                  </MetalButton>
-                </Link>
-              </div>
+            <div className="pt-4">
+              <a href="/dashboard/login">
+                <MetalButton variant="lavender">
+                  Login
+                </MetalButton>
+              </a>
+            </div>
             </div>
 
             {/* Right Side - Hero Image with Styled Container */}
