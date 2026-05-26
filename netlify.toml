@@ -1,5 +1,5 @@
 [[redirects]]
   from = "/dashboard/*"
-  to = "https://YOUR_DASHBOARD_NETLIFY_URL.netlify.app/dashboard/:splat"
+  to = "https://peacecode-dashboard.netlify.app/dashboard/:splat"
   status = 200
   force = true
