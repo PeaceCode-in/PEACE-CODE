@@ -4,7 +4,7 @@ import { useId } from "react"
 import { Header } from "@/components/ui/header-2"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button, MetalButton } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import {
@@ -381,9 +381,9 @@ export default function AnnouncementsPage() {
                       <span>{workshop.location}</span>
                     </div>
                   </div>
-                  <MetalButton variant="lavender" className="w-full mt-4">
+                  <Button variant="lavender" className="w-full mt-4">
                     Register Now
-                  </MetalButton>
+                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -478,9 +478,9 @@ export default function AnnouncementsPage() {
                 </Card>
               </div>
               <Link href="/services" className="mt-8 inline-block">
-                <MetalButton variant="lavender">
+                <Button variant="lavender">
                   Explore All Services
-                </MetalButton>
+                </Button>
               </Link>
             </div>
             <div className="relative">
@@ -515,9 +515,11 @@ export default function AnnouncementsPage() {
               placeholder="Enter your email"
               className="px-6 py-3 rounded-full bg-white/10 border border-white/30 text-white placeholder:text-[#ebd9fc] focus:outline-none focus:ring-2 focus:ring-white/50 w-full sm:w-80"
             />
-            <MetalButton variant="default">
-              Subscribe
-            </MetalButton>
+            <Link href="/signup">
+              <Button variant="default">
+                Join Our Newsletter
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

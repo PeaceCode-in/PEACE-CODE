@@ -1,8 +1,7 @@
 "use client"
 
 import { Header } from "@/components/ui/header-2"
-import { Button, MetalButton } from "@/components/ui/button"
-import { LoginMenu } from "@/components/ui/login-menu"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { AnimatedText } from "@/components/ui/animated-underline-text-one"
@@ -125,13 +124,7 @@ function HomePage() {
                 {t("home.hero.subtitle")}
               </p>
 
-            <div className="pt-4">
-              <a href="/dashboard/login">
-                <MetalButton variant="lavender">
-                  Login
-                </MetalButton>
-              </a>
-            </div>
+
             </div>
 
             {/* Right Side - Hero Image with Styled Container */}
@@ -312,9 +305,9 @@ function HomePage() {
             compassionate digital sanctuary
           </p>
           <Link href="/ai-support">
-            <MetalButton variant="default">
+            <Button variant="default">
               Start Your Healing Journey →
-            </MetalButton>
+            </Button>
           </Link>
         </div>
       </section>
@@ -362,9 +355,9 @@ function HomePage() {
               </div>
 
               <Link href="/counseling">
-                <MetalButton variant="lavender">
+                <Button variant="lavender">
                   Book a Session →
-                </MetalButton>
+                </Button>
               </Link>
             </div>
 

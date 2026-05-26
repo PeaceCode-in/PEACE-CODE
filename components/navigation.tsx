@@ -211,15 +211,7 @@ const searchData: CommandItemType[] = [
     icon: FileText,
     href: '/resources',
   },
-  // Dashboard
-  {
-    id: 'dashboard',
-    title: 'Student Dashboard',
-    description: 'Access your personal dashboard',
-    category: 'Account',
-    icon: User,
-    href: '/auth/simple-login',
-  },
+
 ]
 
 // TypeScript Types
@@ -445,8 +437,12 @@ export function Navigation() {
                 </SearchModal>
               )}
               <ModeToggle />
-              <NavbarButton href="/auth/simple-login" variant="primary" className="hidden md:inline-flex">
-                Student Dashboard
+              <NavbarButton 
+                href={`${process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001/dashboard"}/login`} 
+                variant="primary"
+                className="hidden md:inline-flex"
+              >
+                Sign In
               </NavbarButton>
             </div>
           </NavBody>
@@ -501,13 +497,16 @@ export function Navigation() {
                 )}
               </div>
             ))}
-
-            <div className="border-t border-gray-200 pt-4 mt-4 space-y-3">
-              <NavbarButton href="/auth/simple-login" variant="primary" className="w-full">
-                Student Dashboard
-              </NavbarButton>
+            <div className="mt-6 pt-6 border-t border-slate-200 flex flex-col gap-3">
               <NavbarButton href="/counseling" variant="secondary" className="w-full">
                 Book a Session
+              </NavbarButton>
+              <NavbarButton 
+                href={`${process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001/dashboard"}/login`} 
+                variant="primary" 
+                className="w-full"
+              >
+                Sign In
               </NavbarButton>
             </div>
           </MobileNavMenu>

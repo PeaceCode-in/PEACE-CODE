@@ -6,7 +6,6 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
 import { useScroll } from '@/components/ui/use-scroll';
-import { LoginMenu } from '@/components/ui/login-menu';
 
 // Logo component with fallback
 function LogoImage({ size }: { size: number }) {
@@ -176,7 +175,12 @@ export function Header() {
 					</div>
 				</div>
 				<div className="hidden items-center gap-3 md:flex">
-					<LoginMenu />
+					<Link
+						href={`${process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001/dashboard"}/login`}
+						className={buttonVariants({ variant: "default" })}
+					>
+						Sign In
+					</Link>
 				</div>
 				<div className="flex items-center gap-2 md:hidden">
 					<Button size="icon" variant="outline" onClick={() => setOpen(!open)}>
@@ -231,7 +235,13 @@ export function Header() {
 						))}
 					</div>
 					<div className="flex flex-col gap-2">
-						<LoginMenu className="w-full justify-center" />
+						<Link
+							href={`${process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001/dashboard"}/login`}
+							className={buttonVariants({ variant: "default", className: "w-full text-center" })}
+							onClick={() => setOpen(false)}
+						>
+							Sign In
+						</Link>
 					</div>
 				</div>
 			</div>

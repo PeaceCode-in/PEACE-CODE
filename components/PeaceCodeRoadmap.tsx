@@ -10,7 +10,7 @@ import {
   Users
 } from 'lucide-react'
 import Link from 'next/link'
-import { MetalButton } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 
 // Peace Code Brand Colors
 const colors = {
@@ -258,11 +258,11 @@ export default function PeaceCodeRoadmap() {
               <p className="text-gray-500 text-sm mb-6 max-w-sm">
                 Join our beta program and experience comprehensive mental wellness support.
               </p>
-              <Link href="/screening" className="w-fit">
-                <MetalButton variant="lavender" size="lg">
+              <Link href="/screening">
+                <Button variant="lavender" size="lg">
                   Start Free Screening
                   <ChevronRight className="w-4 h-4 ml-2" />
-                </MetalButton>
+                </Button>
               </Link>
             </div>
           </motion.div>

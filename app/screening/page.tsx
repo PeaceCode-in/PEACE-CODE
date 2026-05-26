@@ -28,7 +28,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
-import { MetalButton } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Header } from "@/components/ui/header-2"
 import { cn } from "@/lib/utils"
 
@@ -304,10 +304,10 @@ function FlipCard({ test, index }: { test: typeof mainTests[0]; index: number })
 
           <div className="pt-4 border-t border-gray-100 mt-4">
             <Link href={test.href}>
-              <MetalButton variant="lavender" className="w-full">
+              <Button variant="lavender" className="w-full">
                 <Play className="w-4 h-4 mr-2" />
                 Take Assessment
-              </MetalButton>
+              </Button>
             </Link>
           </div>
         </div>
@@ -493,15 +493,15 @@ export default function ScreeningPage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="#screenings">
-                <MetalButton variant="lavender" size="lg">
+                <Button variant="lavender" size="lg">
                   <Play className="w-5 h-5 mr-2" />
                   Start Free Screening
-                </MetalButton>
+                </Button>
               </Link>
               <Link href="#how-it-works">
-                <MetalButton variant="default" size="lg">
+                <Button variant="default" size="lg">
                   Learn How It Works
-                </MetalButton>
+                </Button>
               </Link>
             </div>
           </motion.div>
@@ -740,10 +740,10 @@ export default function ScreeningPage() {
             className="text-center mt-10"
           >
             <Link href="/login">
-              <MetalButton variant="lavender">
+              <Button variant="lavender">
                 Login to Access All Tests
                 <ArrowRight className="w-4 h-4 ml-2" />
-              </MetalButton>
+              </Button>
             </Link>
           </motion.div>
         </div>
@@ -821,10 +821,10 @@ export default function ScreeningPage() {
               Start with a free, confidential screening today.
             </p>
             <Link href="#screenings">
-              <MetalButton variant="lavender" size="lg">
+              <Button variant="lavender" size="lg">
                 <Play className="w-5 h-5 mr-2" />
-                Start Your Free Screening
-              </MetalButton>
+                Start Your First Screening
+              </Button>
             </Link>
           </motion.div>
         </div>
