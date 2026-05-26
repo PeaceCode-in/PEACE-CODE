@@ -183,6 +183,12 @@ export function Header() {
 					</Link>
 				</div>
 				<div className="flex items-center gap-2 md:hidden">
+					<Link
+						href={`${process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001/dashboard"}/login`}
+						className={buttonVariants({ variant: "default", size: "sm" })}
+					>
+						Sign In
+					</Link>
 					<Button size="icon" variant="outline" onClick={() => setOpen(!open)}>
 						<MenuToggleIcon open={open} className="size-5" duration={300} />
 					</Button>

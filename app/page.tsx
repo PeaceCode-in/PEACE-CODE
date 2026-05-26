@@ -1,6 +1,5 @@
 "use client"
 
-import { Header } from "@/components/ui/header-2"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -8,7 +7,7 @@ import { AnimatedText } from "@/components/ui/animated-underline-text-one"
 import FeaturesBentoGrid from "@/components/FeaturesBentoGrid"
 import TestimonialsSection from "@/components/TestimonialsSection"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useLanguage } from "@/lib/language-context"
 import { Bot, Users, Sparkles, ShieldCheck, TrendingUp } from "lucide-react"
 import { CheckCircle, XCircle } from "lucide-react"
@@ -20,10 +19,12 @@ import PeaceCodeRoadmap from "@/components/PeaceCodeRoadmap"
 
 function AnimatedCounter({ end, duration = 2000, suffix = "" }: { end: number; duration?: number; suffix?: string }) {
   const [count, setCount] = useState(0)
+  const counterRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
     let startTime: number
     let animationFrame: number
+    let observer: IntersectionObserver
 
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime
@@ -36,12 +37,24 @@ function AnimatedCounter({ end, duration = 2000, suffix = "" }: { end: number; d
       }
     }
 
-    animationFrame = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(animationFrame)
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      if (entries[0].isIntersecting) {
+        animationFrame = requestAnimationFrame(animate)
+        if (counterRef.current) observer.unobserve(counterRef.current)
+      }
+    }
+
+    observer = new IntersectionObserver(handleIntersection, { threshold: 0.1 })
+    if (counterRef.current) observer.observe(counterRef.current)
+
+    return () => {
+      if (animationFrame) cancelAnimationFrame(animationFrame)
+      observer.disconnect()
+    }
   }, [end, duration])
 
   return (
-    <span>
+    <span ref={counterRef}>
       {count.toLocaleString()}
       {suffix}
     </span>
@@ -76,8 +89,6 @@ function HomePage() {
 
   return (
     <div className="min-h-screen w-full relative bg-white">
-      <Header />
-
       {/* Hero Section */}
       <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-4 pb-16">
         {/* Logo Color Glow - #d9d9ff */}

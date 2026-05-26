@@ -1,6 +1,5 @@
 "use client"
 
-import { Header } from "@/components/ui/header-2"
 import { CareersHero } from "@/components/careers/CareersHero"
 import { WhyWeAreHiring } from "@/components/careers/WhyWeAreHiring"
 import { OpenRolesBento } from "@/components/careers/OpenRolesBento"
@@ -13,7 +12,6 @@ export default function CareersPage() {
   return (
     <main className="flex flex-col min-h-screen bg-[#fbfaff]">
       <Toaster richColors position="top-center" />
-      <Header />
       
       <CareersHero />
       <WhyWeAreHiring />

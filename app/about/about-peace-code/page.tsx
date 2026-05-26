@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef, useId } from "react"
-import { motion, useScroll, useTransform, useSpring, useMotionValue, useAnimationFrame, animate } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring, useMotionValue, useAnimationFrame, animate, useInView } from "framer-motion"
 import { wrap } from "@motionone/utils"
 import { 
   Heart, 
@@ -36,7 +36,7 @@ import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MetalButton } from "@/components/ui/button"
-import { Header } from "@/components/ui/header-2"
+
 import { cn } from "@/lib/utils"
 
 // Peace Code Brand Colors
@@ -53,18 +53,22 @@ function AnimatedCounter({ end, suffix = "", duration = 2 }: { end: number; suff
   const count = useMotionValue(0)
   const rounded = useTransform(count, (v) => Math.round(v))
   const [displayValue, setDisplayValue] = useState(0)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-50px" })
 
   useEffect(() => {
-    const animation = animate(count, end, { duration })
-    const unsubscribe = rounded.on("change", (v) => setDisplayValue(v))
-    return () => {
-      animation.stop()
-      unsubscribe()
+    if (isInView) {
+      const animation = animate(count, end, { duration })
+      const unsubscribe = rounded.on("change", (v) => setDisplayValue(v))
+      return () => {
+        animation.stop()
+        unsubscribe()
+      }
     }
-  }, [end, duration])
+  }, [end, duration, isInView])
 
   return (
-    <span className="tabular-nums">
+    <span ref={ref} className="tabular-nums">
       {displayValue.toLocaleString()}{suffix}
     </span>
   )
@@ -277,8 +281,6 @@ export default function AboutPeaceCodePage() {
 
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: colors.ghostWhite }}>
-      <Header />
-
       {/* HERO SECTION */}
       <section 
         ref={heroRef}

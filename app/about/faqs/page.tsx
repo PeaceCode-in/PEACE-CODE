@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
-import { Header } from "@/components/ui/header-2"
+
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { RelatedLinksSection } from "@/components/shared/RelatedLinksSection"
@@ -394,8 +394,6 @@ export default function FAQPage() {
 
   return (
     <main className="flex flex-col min-h-screen bg-[#fbfaff]">
-      <Header />
-
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background elements */}

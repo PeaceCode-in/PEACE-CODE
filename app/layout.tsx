@@ -5,6 +5,7 @@ import "./globals.css"
 import { LanguageProvider } from "@/lib/language-context"
 import { FloatingChatbotButton } from "@/components/chatbot/floating-chatbot-button"
 import { Footer } from "@/components/footer"
+import { Header } from "@/components/ui/header-2"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -55,6 +56,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} ${playfairDisplay.variable} antialiased`}>
       <body className="font-sans">
         <LanguageProvider>
+          <Header />
           {children}
           <Footer />
           <FloatingChatbotButton />

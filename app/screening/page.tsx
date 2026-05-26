@@ -29,7 +29,7 @@ import {
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Header } from "@/components/ui/header-2"
+
 import { cn } from "@/lib/utils"
 
 // Peace Code Brand Colors
@@ -453,10 +453,7 @@ function SubtleGrid() {
 
 export default function ScreeningPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-
-      {/* Hero Section */}
+    <div className="min-h-screen bg-white">      {/* Hero Section */}
       <section className="relative pt-28 pb-20 overflow-hidden">
         <SubtleGrid />
         

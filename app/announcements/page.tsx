@@ -1,7 +1,7 @@
 "use client"
 
 import { useId } from "react"
-import { Header } from "@/components/ui/header-2"
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -228,7 +228,6 @@ const statistics = [
 export default function AnnouncementsPage() {
   return (
     <div className="min-h-screen w-full relative bg-white">
-      <Header />
 
       {/* Hero Section with Diagonal Grid */}
       <section className="relative min-h-[50vh] w-full flex items-center justify-center overflow-hidden pt-20">
