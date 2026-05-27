@@ -1,6 +1,5 @@
 "use client"
 
-import { Header } from "@/components/ui/header-2"
 import { ContactHero } from "@/components/contact/ContactHero"
 import { ContactBento } from "@/components/contact/ContactBento"
 import { ContactForm } from "@/components/contact/ContactForm"
@@ -11,7 +10,6 @@ export function ContactPageContent() {
   return (
     <main className="flex flex-col min-h-screen bg-[#fbfaff]">
       <Toaster richColors position="top-center" />
-      <Header />
 
       <ContactHero />
       <ContactBento />

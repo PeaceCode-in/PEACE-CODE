@@ -13,7 +13,6 @@ import { Bot, Users, Sparkles, ShieldCheck, TrendingUp } from "lucide-react"
 import { CheckCircle, XCircle } from "lucide-react"
 import { Check, X } from "lucide-react"
 import Image from "next/image"
-import { ExpandCards } from "@/components/ui/expand-cards"
 import { ComparisonSection } from "@/components/ComparisonSection"
 import PeaceCodeRoadmap from "@/components/PeaceCodeRoadmap"
 
@@ -384,22 +383,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Meet Our Psychologists - Expandable Cards Section */}
-      <section className="py-16 bg-gradient-to-b from-white to-[#fbfaff]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-          <div className="text-center scroll-reveal">
-            <h2 className="text-5xl sm:text-6xl font-bold text-foreground mb-6">
-              Meet Our <span className="text-[#9667e0]">Expert Team</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Click on a psychologist to open their profile (and use “Talk to them” to start a conversation).
-            </p>
-          </div>
-        </div>
-        
-        {/* Full-width expandable cards - border to border */}
-        <ExpandCards />
-      </section>
+
 
       {/* Community & Resources Section */}
       <section className="section-spacing-lg bg-gradient-to-br from-[#f2ebfb]/50 via-[#fbfaff] to-white">
